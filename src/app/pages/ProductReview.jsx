@@ -36,7 +36,7 @@ export function ProductReview() {
         };
 
         if (id) fetchReviews();
-    }, [id]);
+    }, [id, getReviewsByProductId]);
 
     // --- FILTER REVIEWS LOGIC ---
     // Use useMemo to recalculate list only when reviews or filterOption changes
@@ -273,7 +273,7 @@ export function ProductReview() {
                                             <img
                                                 key={idx}
                                                 src={img}
-                                                alt="Review image"
+                                                alt={`Review attachment ${idx + 1}`}
                                                 className="w-20 h-20 object-cover rounded-lg border border-gray-100 cursor-pointer hover:opacity-80 transition"
                                             />
                                         ))}

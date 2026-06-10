@@ -4,7 +4,7 @@ import { Plus, Edit, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 
 export function AdminProducts() {
-  const { products, categories, addProduct, updateProduct, deleteProduct } = useProducts();
+  const { products, addProduct, updateProduct, deleteProduct } = useProducts();
 
   const [showForm, setShowForm] = useState(false);
   const [editingProductId, setEditingProductId] = useState(null);
