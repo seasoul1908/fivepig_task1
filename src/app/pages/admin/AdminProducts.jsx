@@ -78,10 +78,10 @@ export function AdminProducts() {
     try {
       if (editingProductId) {
         await updateProduct(editingProductId, productData);
-        toast.success("Cập nhật sản phẩm thành công!");
+        toast.success("Product update successful!");
       } else {
         await addProduct(productData);
-        toast.success("Thêm sản phẩm thành công!");
+        toast.success("Product added successfully!");
 
         const newTotalPages = Math.ceil((products.length + 1) / ITEMS_PER_PAGE);
         setCurrentPage(newTotalPages);
@@ -89,7 +89,7 @@ export function AdminProducts() {
 
       resetForm();
     } catch (error) {
-      toast.error(error.message || "Có lỗi xảy ra!");
+      toast.error(error.message || "Error!");
     }
   };
 
@@ -126,9 +126,9 @@ export function AdminProducts() {
         setCurrentPage(newTotalPages);
       }
 
-      toast.success("Xóa sản phẩm thành công!");
+      toast.success("Product removed successfully!");
     } catch (error) {
-      toast.error("Xóa sản phẩm thất bại!");
+      toast.error("Delete the failed product!");
     }
   };
 
@@ -142,7 +142,7 @@ export function AdminProducts() {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Quản lý sản phẩm</h1>
+        <h1 className="text-3xl font-bold">Product management</h1>
 
         <button
           onClick={() => {
@@ -161,7 +161,7 @@ export function AdminProducts() {
           className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Thêm sản phẩm
+          Add Products
         </button>
       </div>
 
@@ -170,7 +170,7 @@ export function AdminProducts() {
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">
-                {editingProductId ? "Chỉnh sửa sản phẩm" : "Thêm sản phẩm mới"}
+                {editingProductId ? "Edit product" : "Add new product"}
               </h2>
               <button onClick={resetForm} className="text-gray-500 hover:text-gray-700">
                 <X className="w-6 h-6" />
@@ -179,7 +179,7 @@ export function AdminProducts() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Tên sản phẩm</label>
+                <label className="block text-sm font-medium mb-2">Product Name</label>
                 <input
                   type="text"
                   required
@@ -190,7 +190,7 @@ export function AdminProducts() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Mô tả</label>
+                <label className="block text-sm font-medium mb-2">Description</label>
                 <textarea
                   required
                   value={formData.description}
@@ -202,7 +202,7 @@ export function AdminProducts() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Giá (VNĐ)</label>
+                  <label className="block text-sm font-medium mb-2">Price (VNĐ)</label>
                   <input
                     type="number"
                     required
@@ -213,14 +213,14 @@ export function AdminProducts() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Danh mục</label>
+                  <label className="block text-sm font-medium mb-2">Category</label>
                   <select
                     required
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="">Chọn danh mục</option>
+                    <option value="">Select category</option>
                     {categoryList.map((cat) => (
                       <option key={cat.id} value={cat.name}>
                         {cat.name}
@@ -233,7 +233,7 @@ export function AdminProducts() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Kích thước (phân cách bằng dấu phẩy)
+                    Size (separated by commas)
                   </label>
                   <input
                     type="text"
@@ -246,7 +246,7 @@ export function AdminProducts() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Số lượng</label>
+                  <label className="block text-sm font-medium mb-2">Quantity</label>
                   <input
                     type="number"
                     required
@@ -258,7 +258,7 @@ export function AdminProducts() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">URL hình ảnh</label>
+                <label className="block text-sm font-medium mb-2">Image</label>
                 <input
                   type="url"
                   value={formData.image}
@@ -273,14 +273,14 @@ export function AdminProducts() {
                   type="submit"
                   className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
                 >
-                  {editingProductId ? "Cập nhật" : "Thêm mới"}
+                  {editingProductId ? "Update" : "Add"}
                 </button>
                 <button
                   type="button"
                   onClick={resetForm}
                   className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300"
                 >
-                  Hủy
+                  Cancel
                 </button>
               </div>
             </form>
@@ -293,12 +293,12 @@ export function AdminProducts() {
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="text-left py-3 px-4">Hình ảnh</th>
-                <th className="text-left py-3 px-4">Tên sản phẩm</th>
+                <th className="text-left py-3 px-4">Image</th>
+                <th className="text-left py-3 px-4">Product Name</th>
                 <th className="text-left py-3 px-4">Danh mục</th>
-                <th className="text-left py-3 px-4">Giá</th>
-                <th className="text-left py-3 px-4">Tồn kho</th>
-                <th className="text-left py-3 px-4">Thao tác</th>
+                <th className="text-left py-3 px-4">Price</th>
+                <th className="text-left py-3 px-4">Inventory</th>
+                <th className="text-left py-3 px-4">Action</th>
               </tr>
             </thead>
 
@@ -359,7 +359,7 @@ export function AdminProducts() {
               {products.length === 0 && (
                 <tr>
                   <td colSpan={6} className="py-6 text-center text-gray-500">
-                    Chưa có sản phẩm nào.
+                    No products are available yet.
                   </td>
                 </tr>
               )}
@@ -370,7 +370,7 @@ export function AdminProducts() {
         {products.length > 0 && (
           <div className="flex items-center justify-between px-4 py-4 border-t bg-white">
             <div className="text-sm text-gray-600">
-              Hiển thị{" "}
+              Available{" "}
               <span className="font-medium">
                 {(currentPage - 1) * ITEMS_PER_PAGE + 1}
               </span>
@@ -379,7 +379,7 @@ export function AdminProducts() {
                 {Math.min(currentPage * ITEMS_PER_PAGE, products.length)}
               </span>
               {" / "}
-              <span className="font-medium">{products.length}</span> sản phẩm
+              <span className="font-medium">{products.length}</span> Product
             </div>
 
             <div className="flex items-center gap-2">
@@ -392,7 +392,7 @@ export function AdminProducts() {
                     : "bg-white hover:bg-gray-50 text-gray-700"
                 }`}
               >
-                Trước
+                Previous
               </button>
 
               {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
@@ -418,7 +418,7 @@ export function AdminProducts() {
                     : "bg-white hover:bg-gray-50 text-gray-700"
                 }`}
               >
-                Sau
+                After
               </button>
             </div>
           </div>

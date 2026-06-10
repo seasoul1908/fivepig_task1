@@ -14,24 +14,24 @@ export function AdminCategories() {
   const handleAddCategory = (e) => {
     e.preventDefault();
     if (!newCategory.trim()) {
-      toast.error('Vui lòng nhập tên danh mục');
+      toast.error('Please enter a category name');
       return;
     }
     addCategory(newCategory.trim());
     setNewCategory('');
-    toast.success('Thêm danh mục thành công!');
+    toast.success('Category added successfully!');
   };
 
   const handleDeleteCategory = (categoryId, categoryName) => {
     const hasProducts = products.some(p => p.category === categoryName);
     if (hasProducts) {
-      toast.error('Không thể xóa danh mục có sản phẩm');
+      toast.error('Cannot delete a category with products');
       return;
     }
 
-    if (!window.confirm(`Bạn có chắc muốn xóa danh mục "${categoryName}" không?`)) {
+    if (!window.confirm(`Are you sure you want to delete the category "${categoryName}"?`)) {
       deleteCategory(categoryId);
-      toast.success('Xóa danh mục thành công!');
+      toast.success('Category deleted successfully!');
     }
   };
 
@@ -41,17 +41,17 @@ export function AdminCategories() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8">Quản lý danh mục</h1>
+      <h1 className="text-3xl font-bold mb-8">Category Management</h1>
 
       {/* Add Category Form */}
       <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-        <h2 className="text-xl font-bold mb-4">Thêm danh mục mới</h2>
+        <h2 className="text-xl font-bold mb-4">Add New Category</h2>
         <form onSubmit={handleAddCategory} className="flex gap-4">
           <input
             type="text"
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
-            placeholder="Nhập tên danh mục..."
+            placeholder="Enter category name..."
             className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
@@ -69,9 +69,9 @@ export function AdminCategories() {
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              <th className="text-left py-3 px-4">Tên danh mục</th>
-              <th className="text-left py-3 px-4">Số lượng sản phẩm</th>
-              <th className="text-left py-3 px-4">Thao tác</th>
+              <th className="text-left py-3 px-4">Category Name</th>
+              <th className="text-left py-3 px-4">Product Count</th>
+              <th className="text-left py-3 px-4">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -80,7 +80,7 @@ export function AdminCategories() {
                 <td className="py-3 px-4 font-medium">{category.name}</td>
                 <td className="py-3 px-4">
                   <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                    {getProductCount(category.name)} sản phẩm
+                    {getProductCount(category.name)} products
                   </span>
                 </td>
                 <td className="py-3 px-4">
@@ -88,7 +88,7 @@ export function AdminCategories() {
                     onClick={() => handleDeleteCategory(category.id, category.name)}
                     disabled={getProductCount(category.name) > 0}
                     className="p-2 text-red-600 hover:bg-red-50 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-                    title={getProductCount(category.name) > 0 ? 'Không thể xóa danh mục có sản phẩm' : 'Xóa danh mục'}
+                    title={getProductCount(category.name) > 0 ? 'Cannot delete a category with products' : 'Delete category'}
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -100,7 +100,7 @@ export function AdminCategories() {
 
         {categories.length === 0 && (
           <div className="text-center py-12 text-gray-500">
-            Chưa có danh mục nào
+            No categories yet
           </div>
         )}
       </div>

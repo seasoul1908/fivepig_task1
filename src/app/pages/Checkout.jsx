@@ -35,20 +35,20 @@ export function Checkout() {
     e.preventDefault();
 
     if (!user) {
-      toast.error('Vui lòng đăng nhập');
+      toast.error('Please log in to continue');
       navigate('/login');
       return;
     }
 
     if (items.length === 0) {
-      toast.error('Giỏ hàng trống');
+      toast.error('Your cart is empty');
       navigate('/cart');
       return;
     }
 
     const phoneRegex = /^[0-9]{8,12}$/;
     if (!phoneRegex.test(formData.phone)) {
-      toast.error('Số điện thoại không hợp lệ (cần 8-12 chữ số)');
+      toast.error('Invalid phone number (must be 8-12 digits)');
       return;
     }
 
@@ -68,7 +68,7 @@ export function Checkout() {
 
       clearCart();
       setIsProcessing(false);
-      toast.success('Đặt hàng thành công!');
+      toast.success('Order placed successfully!');
       navigate(`/orders/${orderId}`);
     }, 2000);
   };
@@ -77,7 +77,7 @@ export function Checkout() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
+          <h2 className="text-2xl font-bold mb-4">Please log in to continue</h2>
         </div>
       </div>
     );
@@ -87,7 +87,7 @@ export function Checkout() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Giỏ hàng trống</h2>
+          <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
         </div>
       </div>
     );
@@ -96,17 +96,17 @@ export function Checkout() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold mb-8">Thanh toán</h1>
+        <h1 className="text-3xl font-bold mb-8">Checkout</h1>
 
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Shipping Info */}
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-xl font-bold mb-4">Thông tin giao hàng</h2>
+                <h2 className="text-xl font-bold mb-4">Shipping Information</h2>
                 <div className="grid grid-cols-1 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Họ và tên</label>
+                    <label className="block text-sm font-medium mb-2">Full Name</label>
                     <input
                       type="text"
                       required
@@ -116,7 +116,7 @@ export function Checkout() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Số điện thoại</label>
+                    <label className="block text-sm font-medium mb-2">Phone Number</label>
                     <input
                       type="tel"
                       required
@@ -126,7 +126,7 @@ export function Checkout() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Địa chỉ</label>
+                    <label className="block text-sm font-medium mb-2">Address</label>
                     <input
                       type="text"
                       required
@@ -136,7 +136,7 @@ export function Checkout() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Thành phố</label>
+                    <label className="block text-sm font-medium mb-2">City</label>
                     <input
                       type="text"
                       required
@@ -150,7 +150,7 @@ export function Checkout() {
 
               {/* Payment Method */}
               <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-xl font-bold mb-4">Phương thức thanh toán</h2>
+                <h2 className="text-xl font-bold mb-4">Payment Method</h2>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                     <input
@@ -163,8 +163,8 @@ export function Checkout() {
                     />
                     <Wallet className="w-6 h-6 text-blue-600" />
                     <div>
-                      <p className="font-medium">Thanh toán khi nhận hàng (COD)</p>
-                      <p className="text-sm text-gray-600">Thanh toán bằng tiền mặt khi nhận hàng</p>
+                      <p className="font-medium">Cash on Delivery (COD)</p>
+                      <p className="text-sm text-gray-600">Pay with cash upon delivery</p>
                     </div>
                   </label>
                   <label className="flex items-center gap-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
@@ -178,8 +178,8 @@ export function Checkout() {
                     />
                     <CreditCard className="w-6 h-6 text-blue-600" />
                     <div>
-                      <p className="font-medium">Thẻ tín dụng / Ghi nợ</p>
-                      <p className="text-sm text-gray-600">Thanh toán trực tuyến an toàn</p>
+                      <p className="font-medium">Credit / Debit Card</p>
+                      <p className="text-sm text-gray-600">Secure online payment</p>
                     </div>
                   </label>
                 </div>
@@ -189,7 +189,7 @@ export function Checkout() {
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
-                <h2 className="text-xl font-bold mb-4">Đơn hàng của bạn</h2>
+                <h2 className="text-xl font-bold mb-4">Your Order</h2>
 
                 <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
                   {items.map(item => (
@@ -214,17 +214,17 @@ export function Checkout() {
 
                 <div className="border-t pt-4 space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>Tạm tính:</span>
+                    <span>Subtotal:</span>
                     <span>{formatPrice(totalPrice)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Phí vận chuyển:</span>
-                    <span>{shippingFee === 0 ? 'Miễn phí' : formatPrice(shippingFee)}</span>
+                    <span>Shipping Fee:</span>
+                    <span>{shippingFee === 0 ? 'Free' : formatPrice(shippingFee)}</span>
                   </div>
                   <div className="border-t pt-2">
                     <div className="flex justify-between font-bold text-lg">
-                      <span>Tổng cộng:</span>
-                      <span className="text-blue-600">{formatPrice(finalTotal)}</span>
+                      <span>Total:</span>
+                      <span><span className="text-blue-600">{formatPrice(finalTotal)}</span></span>
                     </div>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export function Checkout() {
                   disabled={isProcessing}
                   className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 mt-6 disabled:bg-gray-400"
                 >
-                  {isProcessing ? 'Đang xử lý...' : 'Đặt hàng'}
+                  {isProcessing ? 'Processing...' : 'Place Order'}
                 </button>
               </div>
             </div>

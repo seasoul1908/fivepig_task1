@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Star, ShoppingCart } from "lucide-react";
 
 export function ProductCard({ product }) {
+  // Format price as VND
   const formatPrice = (price) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -51,7 +52,7 @@ export function ProductCard({ product }) {
             className="product-card__btn"
           >
             <ShoppingCart className="product-card__btn-icon" />
-            Xem
+            View
           </Link>
         </div>
       </div>
