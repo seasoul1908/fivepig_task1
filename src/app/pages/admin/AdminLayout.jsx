@@ -30,11 +30,11 @@ export function AdminLayout() {
   };
 
   const navItems = [
-    { path: "/admin", label: "Tổng quan", icon: LayoutDashboard },
-    { path: "/admin/products", label: "Sản phẩm", icon: Package },
-    { path: "/admin/orders", label: "Đơn hàng", icon: ShoppingBag },
-    { path: "/admin/categories", label: "Danh mục", icon: FolderTree },
-    { path: "/admin/reports", label: "Báo cáo", icon: BarChart3 },
+    { path: "/admin", label: "Overview", icon: LayoutDashboard },
+    { path: "/admin/products", label: "Products", icon: Package },
+    { path: "/admin/orders", label: "Orders", icon: ShoppingBag },
+    { path: "/admin/categories", label: "Categories", icon: FolderTree },
+    { path: "/admin/reports", label: "Reports", icon: BarChart3 },
   ];
 
 
@@ -50,7 +50,7 @@ export function AdminLayout() {
               FivePigs Store Admin
             </h1>
             <p className="text-sm text-gray-500">
-              Quản lý hệ thống
+              System Management
             </p>
           </div>
 
@@ -63,7 +63,7 @@ export function AdminLayout() {
               to="/"
               className="text-blue-600 text-sm hover:underline"
             >
-              Về trang chủ
+              Back to Home
             </Link>
 
             <button
@@ -71,7 +71,7 @@ export function AdminLayout() {
               className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
             >
               <LogOut size={16} />
-              Đăng xuất
+              Logout
             </button>
           </div>
         </div>

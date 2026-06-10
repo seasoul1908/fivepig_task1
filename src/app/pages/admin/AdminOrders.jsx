@@ -22,9 +22,9 @@ export function AdminOrders() {
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       await updateOrderStatus(orderId, newStatus);
-      toast.success('Cập nhật trạng thái đơn hàng thành công!');
+      toast.success('Order status updated successfully!');
     } catch (error) {
-      toast.error('Cập nhật trạng thái thất bại!');
+      toast.error('Failed to update order status!');
     }
   };
 
@@ -32,14 +32,14 @@ export function AdminOrders() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8">Quản lý đơn hàng</h1>
+      <h1 className="text-3xl font-bold mb-8">Order Management</h1>
 
       {selectedOrderData && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-2xl font-bold">Chi tiết đơn hàng</h2>
+                <h2 className="text-2xl font-bold">Order Details</h2>
                 <p className="text-gray-600">{selectedOrderData.id}</p>
               </div>
               <button
@@ -52,7 +52,7 @@ export function AdminOrders() {
 
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold mb-2">Thông tin khách hàng</h3>
+                <h3 className="font-semibold mb-2">Customer Information</h3>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="font-medium">{selectedOrderData.shippingInfo?.name || '-'}</p>
                   <p className="text-sm text-gray-600">{selectedOrderData.shippingInfo?.phone || '-'}</p>
@@ -63,7 +63,7 @@ export function AdminOrders() {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-2">Sản phẩm</h3>
+                <h3 className="font-semibold mb-2">Products</h3>
                 <div className="space-y-3">
                   {(selectedOrderData.items || []).map((item, index) => (
                     <div key={index} className="flex gap-4 bg-gray-50 p-3 rounded-lg">
@@ -87,14 +87,14 @@ export function AdminOrders() {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-2">Tổng cộng</h3>
+                <h3 className="font-semibold mb-2">Total</h3>
                 <p className="text-2xl font-bold text-blue-600">
                   {formatPrice(selectedOrderData.totalPrice)}
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold mb-2">Cập nhật trạng thái</h3>
+                <h3 className="font-semibold mb-2">Update Status</h3>
                 <select
                   value={selectedOrderData.status}
                   onChange={(e) => handleStatusChange(selectedOrderData.id, e.target.value)}
@@ -113,7 +113,7 @@ export function AdminOrders() {
               onClick={() => setSelectedOrder(null)}
               className="w-full mt-6 bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300"
             >
-              Đóng
+              Close
             </button>
           </div>
         </div>
@@ -124,13 +124,13 @@ export function AdminOrders() {
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="text-left py-3 px-4">Mã đơn</th>
-                <th className="text-left py-3 px-4">Khách hàng</th>
-                <th className="text-left py-3 px-4">Sản phẩm</th>
-                <th className="text-left py-3 px-4">Tổng tiền</th>
-                <th className="text-left py-3 px-4">Trạng thái</th>
-                <th className="text-left py-3 px-4">Ngày đặt</th>
-                <th className="text-left py-3 px-4">Thao tác</th>
+                <th className="text-left py-3 px-4">Order ID</th>
+                <th className="text-left py-3 px-4">Customer</th>
+                <th className="text-left py-3 px-4">Products</th>
+                <th className="text-left py-3 px-4">Total</th>
+                <th className="text-left py-3 px-4">Status</th>
+                <th className="text-left py-3 px-4">Order Date</th>
+                <th className="text-left py-3 px-4">Action</th>
               </tr>
             </thead>
 
@@ -145,7 +145,7 @@ export function AdminOrders() {
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <p className="text-sm">{order.items?.length || 0} sản phẩm</p>
+                    <p className="text-sm">{order.items?.length || 0} products</p>
                   </td>
                   <td className="py-3 px-4 font-semibold">{formatPrice(order.totalPrice)}</td>
                   <td className="py-3 px-4">
@@ -188,7 +188,7 @@ export function AdminOrders() {
 
         {orders.length === 0 && (
           <div className="text-center py-12 text-gray-500">
-            Chưa có đơn hàng nào
+            No orders yet
           </div>
         )}
       </div>
