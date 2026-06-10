@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { initialOrders } from '../data/mockData';
 
 const OrderContext = createContext();
 
@@ -12,23 +13,26 @@ export const ORDER_STATUS = {
 
 export function OrderProvider({ children }) {
   const [orders, setOrders] = useState([]);
-  const API_URL = 'http://localhost:9999/orders';
 
-  // Lấy toàn bộ đơn hàng từ database khi khởi động web
+  // Lấy toàn bộ đơn hàng từ localStorage/mockData khi khởi động web
   useEffect(() => {
-    const fetchOrders = async () => {
+    const storedOrders = localStorage.getItem('fivepigs_orders');
+    let parsedOrders = initialOrders;
+
+    if (storedOrders) {
       try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        setOrders(data);
-      } catch (error) {
-        console.error("Lỗi khi tải dữ liệu đơn hàng:", error);
+        parsedOrders = JSON.parse(storedOrders);
+      } catch (e) {
+        console.error("Error parsing stored orders, resetting to initial", e);
       }
-    };
-    fetchOrders();
+    } else {
+      localStorage.setItem('fivepigs_orders', JSON.stringify(initialOrders));
+    }
+
+    setOrders(parsedOrders);
   }, []);
   
-  // Tạo đơn hàng mới (Gửi POST lên database)
+  // Tạo đơn hàng mới
   const createOrder = async (orderData) => {
     const newOrder = {
       ...orderData,
@@ -38,38 +42,22 @@ export function OrderProvider({ children }) {
     };
 
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newOrder),
-      });
-
-      const savedOrder = await response.json();
-      
-      // Cập nhật lại state cục bộ để giao diện hiển thị ngay lập tức
-      setOrders((prev) => [...prev, savedOrder]);
-      return savedOrder.id;
+      const updatedOrders = [...orders, newOrder];
+      setOrders(updatedOrders);
+      localStorage.setItem('fivepigs_orders', JSON.stringify(updatedOrders));
+      return newOrder.id;
     } catch (error) {
       console.error("Lỗi khi lưu đơn hàng:", error);
       return null;
     }
   };
 
-  // Cập nhật trạng thái đơn hàng (Dùng PATCH để sửa 1 phần dữ liệu)
+  // Cập nhật trạng thái đơn hàng
   const updateOrderStatus = async (orderId, status) => {
     try {
-      await fetch(`${API_URL}/${orderId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ status }),
-      });
-
-      // Cập nhật lại UI
-      setOrders((prev) => prev.map((o) => (o.id === orderId ? { ...o, status } : o)));
+      const updatedOrders = orders.map((o) => (o.id === orderId ? { ...o, status } : o));
+      setOrders(updatedOrders);
+      localStorage.setItem('fivepigs_orders', JSON.stringify(updatedOrders));
     } catch (error) {
       console.error("Lỗi khi cập nhật trạng thái đơn hàng:", error);
     }
