@@ -21,12 +21,12 @@ export function ProductDetail() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Không tìm thấy sản phẩm</h2>
+          <h2 className="text-2xl font-bold mb-4">Product not found</h2>
           <button
             onClick={() => navigate('/products')}
             className="text-blue-600 hover:underline"
           >
-            Quay lại danh sách sản phẩm
+            Back to product list
           </button>
         </div>
       </div>
@@ -42,23 +42,23 @@ export function ProductDetail() {
 
   const handleAddToCart = () => {
     if (!user) {
-      toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng');
+      toast.error('Please log in to add items to your cart');
       navigate('/login');
       return;
     }
 
     if (!selectedSize) {
-      toast.error('Vui lòng chọn kích thước');
+      toast.error('Please select a size');
       return;
     }
 
     if (quantity > product.stock) {
-      toast.error('Số lượng vượt quá hàng có sẵn');
+      toast.error('Quantity exceeds available stock');
       return;
     }
 
     addToCart(product, selectedSize, quantity);
-    toast.success('Đã thêm vào giỏ hàng!');
+    toast.success('Added to cart!');
   };
 
   return (
@@ -99,7 +99,7 @@ export function ProductDetail() {
                   ))}
                 </div>
                 <span className="text-sm text-gray-600">
-                  {product.rating} ({product.reviews} đánh giá)
+                  {product.rating} ({product.reviews} reviews)
                 </span>
               </div>
 
@@ -111,7 +111,7 @@ export function ProductDetail() {
 
               {/* Size Selection */}
               <div className="mb-6">
-                <label className="block font-medium mb-3">Chọn kích thước:</label>
+                <label className="block font-medium mb-3">Select size:</label>
                 <div className="flex gap-2">
                   {product.sizes.map(size => (
                     <button
@@ -131,7 +131,7 @@ export function ProductDetail() {
 
               {/* Quantity */}
               <div className="mb-6">
-                <label className="block font-medium mb-3">Số lượng:</label>
+                <label className="block font-medium mb-3">Quantity:</label>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -154,7 +154,7 @@ export function ProductDetail() {
                     +
                   </button>
                   <span className="text-sm text-gray-600">
-                    ({product.stock} sẵn có)
+                    ({product.stock} available)
                   </span>
                 </div>
               </div>
@@ -166,22 +166,22 @@ export function ProductDetail() {
                 className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 <ShoppingCart className="w-5 h-5" />
-                {product.stock === 0 ? 'Hết hàng' : 'Thêm vào giỏ hàng'}
+                {product.stock === 0 ? 'Out of stock' : 'Add to cart'}
               </button>
 
               {/* Features */}
               <div className="mt-8 grid grid-cols-3 gap-4 pt-8 border-t">
                 <div className="text-center">
                   <Package className="w-8 h-8 mx-auto mb-2 text-blue-600" />
-                  <p className="text-xs text-gray-600">Miễn phí đổi trả</p>
+                  <p className="text-xs text-gray-600">Free return</p>
                 </div>
                 <div className="text-center">
                   <Truck className="w-8 h-8 mx-auto mb-2 text-blue-600" />
-                  <p className="text-xs text-gray-600">Giao hàng nhanh</p>
+                  <p className="text-xs text-gray-600">Fast delivery</p>
                 </div>
                 <div className="text-center">
                   <Shield className="w-8 h-8 mx-auto mb-2 text-blue-600" />
-                  <p className="text-xs text-gray-600">Hàng chính hãng</p>
+                  <p className="text-xs text-gray-600">Authentic</p>
                 </div>
               </div>
             </div>
