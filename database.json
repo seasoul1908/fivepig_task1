@@ -1,0 +1,554 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "T-Shirts"
+    },
+    {
+      "id": "2",
+      "name": "Shirts"
+    },
+    {
+      "id": "3",
+      "name": "Jeans"
+    },
+    {
+      "id": "4",
+      "name": "Pants"
+    },
+    {
+      "id": "5",
+      "name": "Hoodies"
+    },
+    {
+      "id": "6",
+      "name": "Jackets"
+    },
+    {
+      "id": "7",
+      "name": "Dresses"
+    },
+    {
+      "id": "8",
+      "name": "Skirts"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Áo Thun Trơn Basic",
+      "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+      "price": 150000,
+      "category": "T-Shirts",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 100,
+      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.8,
+      "reviews": 320
+    },
+    {
+      "id": "2",
+      "name": "Áo Thun Form Rộng Oversize",
+      "description": "Áo thun nam nữ form rộng, phong cách đường phố (streetwear) năng động.",
+      "price": 180000,
+      "category": "T-Shirts",
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 80,
+      "image": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.5,
+      "reviews": 150
+    },
+    {
+      "id": "3",
+      "name": "Áo Sơ Mi Oxford Dài Tay",
+      "description": "Sơ mi Oxford thanh lịch, đứng form, dễ dàng kết hợp đi làm hoặc đi chơi.",
+      "price": 320000,
+      "category": "Shirts",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 50,
+      "image": "https://images.unsplash.com/photo-1596755094514-f87e32f85e2c?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.7,
+      "reviews": 89
+    },
+    {
+      "id": "4",
+      "name": "Áo Sơ Mi Flannel Kẻ Caro",
+      "description": "Sơ mi caro chất liệu vải nỉ mềm mại, mang đậm chất cổ điển và cá tính.",
+      "price": 280000,
+      "category": "Shirts",
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1604644401890-0bd678c83788?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.4,
+      "reviews": 112
+    },
+    {
+      "id": "5",
+      "name": "Áo Polo Nam Cổ Trụ",
+      "description": "Áo thun có cổ chất vải cá sấu cao cấp, không nhăn, không xù lông.",
+      "price": 250000,
+      "category": "Shirts",
+      "sizes": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stock": 120,
+      "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.9,
+      "reviews": 430
+    },
+    {
+      "id": "6",
+      "name": "Quần Jeans Nam Ống Đứng",
+      "description": "Quần jeans form straight cơ bản, chất denim dày dặn, bền màu.",
+      "price": 450000,
+      "category": "Jeans",
+      "sizes": [
+        "29",
+        "30",
+        "31",
+        "32",
+        "34"
+      ],
+      "stock": 65,
+      "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.6,
+      "reviews": 75
+    },
+    {
+      "id": "7",
+      "name": "Quần Jeans Nữ Lưng Cao",
+      "description": "Jeans cạp cao tôn dáng, giúp kéo dài chân, chất liệu co giãn nhẹ.",
+      "price": 380000,
+      "category": "Jeans",
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "stock": 45,
+      "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.8,
+      "reviews": 210
+    },
+    {
+      "id": "8",
+      "name": "Quần Tây Chino Nam",
+      "description": "Quần Chino vải kaki co giãn, thiết kế tinh tế, phù hợp môi trường công sở.",
+      "price": 350000,
+      "category": "Pants",
+      "sizes": [
+        "30",
+        "31",
+        "32",
+        "33"
+      ],
+      "stock": 55,
+      "image": "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.5,
+      "reviews": 60
+    },
+    {
+      "id": "9",
+      "name": "Quần Nỉ Jogger Thể Thao",
+      "description": "Quần jogger bo gấu thoải mái, chuyên dụng cho tập gym hoặc dạo phố.",
+      "price": 220000,
+      "category": "Pants",
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 80,
+      "image": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.3,
+      "reviews": 45
+    },
+    {
+      "id": "10",
+      "name": "Áo Hoodie Trơn Có Mũ",
+      "description": "Hoodie nỉ bông dày dặn, giữ ấm cực tốt cho mùa đông.",
+      "price": 290000,
+      "category": "Hoodies",
+      "sizes": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "stock": 150,
+      "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.7,
+      "reviews": 340
+    },
+    {
+      "id": "11",
+      "name": "Áo Hoodie Zip Thể Thao",
+      "description": "Áo khoác nỉ có khóa kéo, thiết kế mũ trùm tiện lợi, năng động.",
+      "price": 310000,
+      "category": "Hoodies",
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 70,
+      "image": "https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.6,
+      "reviews": 125
+    },
+    {
+      "id": "12",
+      "name": "Áo Khoác Denim Bụi Bặm",
+      "description": "Jacket bò form cứng cáp, phong cách vintage dễ phối với áo thun.",
+      "price": 450000,
+      "category": "Jackets",
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 35,
+      "image": "https://images.unsplash.com/photo-1495105718506-659a617631da?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.8,
+      "reviews": 270
+    },
+    {
+      "id": "13",
+      "name": "Áo Khoác Bomber Gió",
+      "description": "Áo khoác dù bomber 2 lớp, chống nước nhẹ, cản gió tốt.",
+      "price": 380000,
+      "category": "Jackets",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 90,
+      "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.4,
+      "reviews": 88
+    },
+    {
+      "id": "14",
+      "name": "Áo Khoác Da Biker",
+      "description": "Jacket da lót nỉ sành điệu, đường may tỉ mỉ, khóa kéo cao cấp.",
+      "price": 850000,
+      "category": "Jackets",
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "stock": 20,
+      "image": "https://images.unsplash.com/photo-1520975954732-57dd22299614?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.9,
+      "reviews": 65
+    },
+    {
+      "id": "15",
+      "name": "Váy Liền Mùa Hè Họa Tiết Hoa",
+      "description": "Đầm hoa nhí vintage, chất đũi lụa mềm mại, bay bổng cho ngày nắng.",
+      "price": 420000,
+      "category": "Dresses",
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "stock": 60,
+      "image": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.7,
+      "reviews": 142
+    },
+    {
+      "id": "16",
+      "name": "Đầm Dự Tiệc Dáng Ôm",
+      "description": "Đầm bodycon ôm sát quyến rũ, chất thun gân co giãn 4 chiều.",
+      "price": 550000,
+      "category": "Dresses",
+      "sizes": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "stock": 25,
+      "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.5,
+      "reviews": 89
+    },
+    {
+      "id": "17",
+      "name": "Chân Váy Chữ A Công Sở",
+      "description": "Chân váy chữ A tôn dáng, dễ dàng mix match cùng áo sơ mi.",
+      "price": 260000,
+      "category": "Skirts",
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "stock": 85,
+      "image": "https://images.unsplash.com/photo-1582142407894-ec85a1260a46?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.6,
+      "reviews": 110
+    },
+    {
+      "id": "18",
+      "name": "Chân Váy Xếp Ly Tennis",
+      "description": "Váy ngắn xếp ly xòe trẻ trung, phong cách nữ sinh Hàn Quốc.",
+      "price": 190000,
+      "category": "Skirts",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "stock": 110,
+      "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.8,
+      "reviews": 235
+    },
+    {
+      "id": "19",
+      "name": "Quần Short Kaki Nam",
+      "description": "Quần ngố kaki thoáng mát, thích hợp mặc dạo phố mùa hè.",
+      "price": 190000,
+      "category": "Pants",
+      "sizes": [
+        "29",
+        "30",
+        "31",
+        "32",
+        "34"
+      ],
+      "stock": 90,
+      "image": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.5,
+      "reviews": 56
+    },
+    {
+      "id": "20",
+      "name": "Áo Sơ Mi Lụa Cổ V Nữ",
+      "description": "Sơ mi chất lụa tơ tằm nhân tạo bóng mượt, rủ tự nhiên, sang trọng.",
+      "price": 380000,
+      "category": "Shirts",
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1549062572-544a64fb0c56?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.7,
+      "reviews": 178
+    }
+  ],
+  "reviews": [
+    {
+      "id": "1",
+      "productId": "1",
+      "author": "Trần Minh H.",
+      "rating": 5,
+      "date": "10/03/2026",
+      "content": "Áo mặc rất thích, vải mịn, form đẹp. Sẽ mua thêm màu khác. Giao hàng cũng rất nhanh chóng.",
+      "images": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&auto=format&fit=crop&q=60"
+      ]
+    },
+    {
+      "id": "2",
+      "productId": 1,
+      "author": "Lê Thị P.",
+      "rating": 4,
+      "date": "08/03/2026",
+      "content": "Áo đẹp nhưng size L hơi rộng một chút so với mình. Chất lượng vải thì ok, không bị xù lông sau khi giặt.",
+      "images": []
+    },
+    {
+      "id": "3",
+      "productId": 2,
+      "author": "Nguyễn Văn T.",
+      "rating": 5,
+      "date": "09/03/2026",
+      "content": "Form áo chuẩn oversize luôn, mặc bao ngầu. Mình m65 nặng 55kg mặc size M vừa đẹp nha mọi người.",
+      "images": []
+    },
+    {
+      "id": "c67f",
+      "productId": 1,
+      "author": "hiep",
+      "rating": 5,
+      "date": "10/3/2026",
+      "content": "hay",
+      "images": []
+    },
+    {
+      "id": "3413",
+      "productId": 1,
+      "author": "hiep",
+      "rating": 4,
+      "date": "10/3/2026",
+      "content": "sán phẩm tốt",
+      "images": []
+    },
+    {
+      "id": "3c28",
+      "productId": 1,
+      "author": "hiep",
+      "rating": 3,
+      "date": "10/3/2026",
+      "content": "sản phẩm tốt\n",
+      "images": []
+    },
+    {
+      "id": "afce",
+      "productId": 1,
+      "author": "hiep",
+      "rating": 4,
+      "date": "10/3/2026",
+      "content": "hay\n",
+      "images": []
+    },
+    {
+      "id": "53d0",
+      "productId": 1,
+      "author": "Nguyen Duc Hiep",
+      "rating": 1,
+      "date": "19/3/2026",
+      "content": "Sản phẩm chán",
+      "images": []
+    },
+    {
+      "id": "1029",
+      "productId": 1,
+      "author": "Mai",
+      "rating": 4,
+      "date": "24/3/2026",
+      "content": "Áo tốt",
+      "images": []
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-1773886049183",
+      "userId": "1773881368911",
+      "items": [
+        {
+          "product": {
+            "id": "1",
+            "name": "Áo Thun Trơn Basic",
+            "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+            "price": 150000,
+            "category": "T-Shirts",
+            "sizes": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "stock": 100,
+            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+            "rating": 4.8,
+            "reviews": 320
+          },
+          "size": "XL",
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 180000,
+      "status": "Delivered",
+      "shippingInfo": {
+        "name": "Nguyen Duc Hiep",
+        "phone": "12345678909",
+        "address": "1",
+        "city": "1"
+      },
+      "paymentMethod": "cod",
+      "paymentStatus": "pending",
+      "createdAt": "2026-03-19T02:07:29.183Z"
+    },
+    {
+      "id": "ORD-1774323256131",
+      "userId": "1774323107765",
+      "items": [
+        {
+          "product": {
+            "id": "1",
+            "name": "Áo Thun Trơn Basic",
+            "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+            "price": 150000,
+            "category": "T-Shirts",
+            "sizes": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "stock": 100,
+            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+            "rating": 4.8,
+            "reviews": 320
+          },
+          "size": "M",
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": "3",
+            "name": "Áo Sơ Mi Oxford Dài Tay",
+            "description": "Sơ mi Oxford thanh lịch, đứng form, dễ dàng kết hợp đi làm hoặc đi chơi.",
+            "price": 320000,
+            "category": "Shirts",
+            "sizes": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "stock": 50,
+            "image": "https://images.unsplash.com/photo-1596755094514-f87e32f85e2c?w=500&auto=format&fit=crop&q=60",
+            "rating": 4.7,
+            "reviews": 89
+          },
+          "size": "L",
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 620000,
+      "status": "Delivered",
+      "shippingInfo": {
+        "name": "Mai",
+        "phone": "086867812",
+        "address": "a",
+        "city": "a"
+      },
+      "paymentMethod": "cod",
+      "paymentStatus": "pending",
+      "createdAt": "2026-03-24T03:34:16.131Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
