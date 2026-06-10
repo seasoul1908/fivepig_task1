@@ -16,7 +16,7 @@ export function OrderDetail() {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleString('vi-VN', {
+    return new Date(dateString).toLocaleString('en-US', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
@@ -29,9 +29,9 @@ export function OrderDetail() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Không tìm thấy đơn hàng</h2>
+          <h2 className="text-2xl font-bold mb-4">Order not found</h2>
           <Link to="/orders" className="text-blue-600 hover:underline">
-            Quay lại danh sách đơn hàng
+            Back to order list
           </Link>
         </div>
       </div>
@@ -39,7 +39,7 @@ export function OrderDetail() {
   }
 
   const handleCancelOrder = () => {
-    if (window.confirm('Bạn có chắc muốn hủy đơn hàng này?')) {
+    if (window.confirm('Are you sure you want to cancel this order?')) {
       cancelOrder(order.id);
     }
   };
@@ -62,16 +62,16 @@ export function OrderDetail() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6">
           <Link to="/orders" className="text-blue-600 hover:underline">
-            ← Quay lại danh sách đơn hàng
+            ← Back to order list
           </Link>
         </div>
 
         <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-2xl font-bold mb-2">Chi tiết đơn hàng</h1>
-              <p className="text-gray-600">Mã đơn hàng: {order.id}</p>
-              <p className="text-sm text-gray-500">Đặt ngày: {formatDate(order.createdAt)}</p>
+              <h1 className="text-2xl font-bold mb-2">Order Details</h1>
+              <p className="text-gray-600">Order ID: {order.id}</p>
+              <p className="text-sm text-gray-500">Placed on: {formatDate(order.createdAt)}</p>
             </div>
             <div className="text-right">
               <span className={`inline-block px-4 py-2 rounded-full font-medium ${getStatusColor(order.status)}`}>
@@ -81,7 +81,7 @@ export function OrderDetail() {
           </div>
 
           <div className="border-t border-b py-6 mb-6">
-            <h2 className="font-semibold mb-4">Sản phẩm</h2>
+            <h2 className="font-semibold mb-4">Products</h2>
             <div className="space-y-4">
               {order.items.map((item, index) => (
                 <div key={index} className="flex gap-4 items-center">
@@ -105,7 +105,7 @@ export function OrderDetail() {
                       to={`/products/${item.product.id}/reviews`}
                       className="text-sm font-medium text-green-600 hover:text-green-700 border border-green-600 px-4 py-2 rounded-md transition hover:bg-green-50"
                     >
-                      Đánh giá
+                      Review
                     </Link>
                   )}
                 </div>
@@ -115,7 +115,7 @@ export function OrderDetail() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-              <h2 className="font-semibold mb-3">Thông tin giao hàng</h2>
+              <h2 className="font-semibold mb-3">Shipping Information</h2>
               <div className="bg-gray-50 p-4 rounded-lg text-sm">
                 <p className="font-medium">{order.shippingInfo.name}</p>
                 <p>{order.shippingInfo.phone}</p>
@@ -124,13 +124,13 @@ export function OrderDetail() {
             </div>
             
             <div>
-              <h2 className="font-semibold mb-3">Phương thức thanh toán</h2>
+              <h2 className="font-semibold mb-3">Payment Method</h2>
               <div className="bg-gray-50 p-4 rounded-lg text-sm">
                 <p className="text-gray-700">
-                  {order.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng (COD)' : 'Thẻ tín dụng/Ghi nợ'}
+                  {order.paymentMethod === 'cod' ? 'Cash on Delivery (COD)' : 'Credit / Debit Card'}
                 </p>
                 <p className={`font-medium mt-1 ${order.paymentStatus === 'Success' ? 'text-green-600' : 'text-red-600'}`}>
-                  Trạng thái: {order.paymentStatus === 'Success' ? 'Đã thanh toán' : 'Chưa thanh toán'}
+                  Status: {order.paymentStatus === 'Success' ? 'Paid' : 'Unpaid'}
                 </p>
               </div>
             </div>
@@ -138,7 +138,7 @@ export function OrderDetail() {
 
           <div className="border-t pt-6">
             <div className="flex justify-between items-center mb-6">
-              <span className="text-lg font-semibold">Tổng cộng:</span>
+              <span className="text-lg font-semibold">Total:</span>
               <span className="text-2xl font-bold text-blue-600">
                 {formatPrice(order.totalPrice)}
               </span>
@@ -150,7 +150,7 @@ export function OrderDetail() {
                   onClick={handleCancelOrder}
                   className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition font-medium shadow-sm"
                 >
-                  Hủy đơn hàng
+                  Cancel Order
                 </button>
               )}
             </div>
