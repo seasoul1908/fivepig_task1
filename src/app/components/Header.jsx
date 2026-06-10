@@ -102,7 +102,7 @@ export function Header() {
 
               <button className="btn" onClick={handleLogout}>
                 <LogOut size={18} style={{ marginRight: 8 }} />
-                Đăng xuất
+                Logout
               </button>
             </>
           ) : (
@@ -111,7 +111,7 @@ export function Header() {
               onClick={() => navigate("/login")}
             >
               <User size={18} style={{ marginRight: 8 }} />
-              Đăng nhập
+              Login
             </button>
           )}
         </nav>
