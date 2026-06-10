@@ -23,7 +23,7 @@ export function Login() {
     if (isLogin) {
       const success = login(formData.email, formData.password);
       if (success) {
-        toast.success("Đăng nhập thành công!");
+        toast.success("Successfully logged in!");
         // Check if admin
         if (formData.email === "admin@fivepigs.com") {
           navigate("/admin");
@@ -31,11 +31,11 @@ export function Login() {
           navigate("/");
         }
       } else {
-        toast.error("Email hoặc mật khẩu không đúng");
+        toast.error("The email or password you entered is incorrect!");
       }
     } else {
       if (!formData.name) {
-        toast.error("Vui lòng nhập họ tên");
+        toast.error("Please enter your name.");
         return;
       }
       const success = register(
@@ -44,10 +44,10 @@ export function Login() {
         formData.name,
       );
       if (success) {
-        toast.success("Đăng ký thành công!");
+        toast.success("Sign up successful!");
         navigate("/");
       } else {
-        toast.error("Email đã tồn tại");
+        toast.error("This email is already registered.");
       }
     }
   };
@@ -64,20 +64,20 @@ export function Login() {
           />
           <h2 className="text-3xl font-bold text-gray-900">FivePigs Store</h2>
           <p className="text-gray-600 mt-2">
-            {isLogin ? "Đăng nhập vào tài khoản" : "Tạo tài khoản mới"}
+            {isLogin ? "Log into your account" : "Create new account"}
           </p>
         </div>
 
         {/* Demo Info */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <p className="text-sm font-semibold text-blue-800 mb-2">
-            Tài khoản demo:
+            Test account:
           </p>
           <p className="text-sm text-blue-700">
             <strong>Admin:</strong> admin@fivepigs.com / admin123
           </p>
           <p className="text-sm text-blue-700 mt-1">
-            <strong>Hoặc</strong> đăng ký tài khoản mới
+            <strong>Or</strong> register a new account
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export function Login() {
             }`}
           >
             <LogIn className="w-4 h-4 inline mr-2" />
-            Đăng nhập
+            Login
           </button>
           <button
             onClick={() => setIsLogin(false)}
@@ -103,7 +103,7 @@ export function Login() {
             }`}
           >
             <UserPlus className="w-4 h-4 inline mr-2" />
-            Đăng ký
+            Sign up
           </button>
         </div>
 
@@ -112,7 +112,7 @@ export function Login() {
           {!isLogin && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Họ và tên
+                Name
               </label>
               <input
                 type="text"
@@ -122,7 +122,7 @@ export function Login() {
                   setFormData({ ...formData, name: e.target.value })
                 }
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Nguyễn Văn A"
+                placeholder=" Enter Your Name"
               />
             </div>
           )}
@@ -145,7 +145,7 @@ export function Login() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Mật khẩu
+              Password
             </label>
             <input
               type="password"
@@ -163,7 +163,7 @@ export function Login() {
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
           >
-            {isLogin ? "Đăng nhập" : "Đăng ký"}
+            {isLogin ? "Login" : "Sign up"}
           </button>
         </form>
 
@@ -173,11 +173,11 @@ export function Login() {
             to="/forgot-password"
             className="text-sm text-blue-600 hover:underline"
           >
-            Quên mật khẩu
+            Forgot your password?
           </Link>
           <br />
           <Link to="/" className="text-sm text-blue-600 hover:underline">
-            ← Quay lại trang chủ
+            ← Return to homepage
           </Link>
         </div>
       </div>

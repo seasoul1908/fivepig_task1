@@ -548,6 +548,44 @@
       "paymentMethod": "cod",
       "paymentStatus": "pending",
       "createdAt": "2026-03-24T03:34:16.131Z"
+    },
+    {
+      "id": "ORD-1781060951358",
+      "userId": "1781060906561",
+      "items": [
+        {
+          "product": {
+            "id": "1",
+            "name": "Áo Thun Trơn Basic",
+            "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+            "price": 150000,
+            "category": "T-Shirts",
+            "sizes": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "stock": 100,
+            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+            "rating": 4.8,
+            "reviews": 320
+          },
+          "size": "XL",
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 180000,
+      "status": "Delivered",
+      "shippingInfo": {
+        "name": "Nguyen The Trung",
+        "phone": "0787556181",
+        "address": "Ha Noi",
+        "city": "Ha Noi"
+      },
+      "paymentMethod": "cod",
+      "paymentStatus": "pending",
+      "createdAt": "2026-06-10T03:09:11.358Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
