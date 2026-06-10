@@ -14,19 +14,19 @@ export function Layout() {
         <div className="container footer__grid">
           <div>
             <h3>FivePigs Store</h3>
-            <p>Thời trang hiện đại cho giới trẻ</p>
+            <p>Modern fashion for the youth</p>
           </div>
 
           <div>
-            <h3>Liên hệ</h3>
+            <h3>Contact</h3>
             <p>Email: support@fivepigs.com</p>
             <p>Hotline: 1900-xxxx</p>
           </div>
 
           <div>
-            <h3>Chính sách</h3>
-            <p>Chính sách đổi trả</p>
-            <p>Chính sách bảo mật</p>
+            <h3>Policies</h3>
+            <p>Return Policy</p>
+            <p>Privacy Policy</p>
           </div>
         </div>
 
