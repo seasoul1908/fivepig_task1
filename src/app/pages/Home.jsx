@@ -5,17 +5,15 @@ import { TrendingUp, Shield, Truck, CreditCard } from "lucide-react";
 import "../styles/home.css";
 
 export function Home() {
-  // Lấy danh sách sản phẩm, danh mục và trạng thái loading từ Context
   const { products, categories, loading } = useProducts();
-  
-  // Lấy 6 sản phẩm đầu tiên để làm sản phẩm nổi bật
+
+  // Get first 6 products
   const featuredProducts = products.slice(0, 6);
 
-  // Hiển thị thông báo trong lúc chờ lấy dữ liệu từ json-server
   if (loading) {
     return (
       <div style={{ textAlign: 'center', padding: '100px 0', fontSize: '1.2rem' }}>
-        Đang tải dữ liệu FivePigs Store...
+        Loading FivePigs Store data...
       </div>
     );
   }
@@ -25,10 +23,10 @@ export function Home() {
       {/* Hero Section */}
       <section className="hero">
         <div className="container hero__inner">
-          <h1>Chào mừng đến FivePigs Store</h1>
-          <p>Thời trang hiện đại, phong cách trẻ trung</p>
+          <h1>Welcome to FivePigs Store</h1>
+          <p>Modern fashion, youthful style</p>
           <Link to="/products" className="hero__btn">
-            Khám phá ngay
+            Shop Now
           </Link>
         </div>
       </section>
@@ -40,32 +38,32 @@ export function Home() {
             <div className="feature__icon">
               <Truck />
             </div>
-            <h3>Giao hàng miễn phí</h3>
-            <p>Đơn hàng trên 500.000đ</p>
+            <h3>Free Shipping</h3>
+            <p>On orders over 500,000đ</p>
           </div>
 
           <div className="feature">
             <div className="feature__icon">
               <Shield />
             </div>
-            <h3>Đảm bảo chất lượng</h3>
-            <p>Hoàn tiền 100%</p>
+            <h3>Quality Assured</h3>
+            <p>100% money-back guarantee</p>
           </div>
 
           <div className="feature">
             <div className="feature__icon">
               <CreditCard />
             </div>
-            <h3>Thanh toán an toàn</h3>
-            <p>Bảo mật thông tin</p>
+            <h3>Secure Payment</h3>
+            <p>Safe and encrypted</p>
           </div>
 
           <div className="feature">
             <div className="feature__icon">
               <TrendingUp />
             </div>
-            <h3>Xu hướng mới nhất</h3>
-            <p>Cập nhật liên tục</p>
+            <h3>Latest Trends</h3>
+            <p>Constantly updated</p>
           </div>
         </div>
       </section>
@@ -74,24 +72,23 @@ export function Home() {
       <section className="section">
         <div className="container">
           <div className="section__head">
-            <h2>Sản phẩm nổi bật</h2>
-            <p>Khám phá những sản phẩm thời trang hot nhất</p>
+            <h2>Featured Products</h2>
+            <p>Discover our hottest fashion items</p>
           </div>
 
           <div className="products__grid">
-            {/* Kiểm tra mảng có dữ liệu thì mới hiển thị, tránh lỗi */}
             {featuredProducts && featuredProducts.length > 0 ? (
               featuredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))
             ) : (
-              <p style={{ gridColumn: '1 / -1', textAlign: 'center' }}>Chưa có sản phẩm nào.</p>
+              <p style={{ gridColumn: '1 / -1', textAlign: 'center' }}>No products available.</p>
             )}
           </div>
 
           <div className="center mt-24">
             <Link to="/products" className="btn-primary">
-              Xem tất cả sản phẩm
+              View All Products
             </Link>
           </div>
         </div>
@@ -101,18 +98,15 @@ export function Home() {
       <section className="section section--white">
         <div className="container">
           <div className="section__head">
-            <h2>Danh mục sản phẩm</h2>
-            <p>Tìm kiếm theo danh mục yêu thích của bạn</p>
+            <h2>Product Categories</h2>
+            <p>Browse by your favorite categories</p>
           </div>
 
           <div className="categories__grid">
-            {/* Xử lý linh hoạt: Nếu category trong DB là đối tượng {id, name} thì lấy name,
-              nếu là chuỗi chữ bình thường thì lấy thẳng nó.
-            */}
             {categories && categories.length > 0 && categories.map((category) => {
               const catName = category.name || category;
               const catId = category.id || category;
-              
+
               return (
                 <Link
                   key={catId}
