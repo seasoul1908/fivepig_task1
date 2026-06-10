@@ -25,11 +25,11 @@ export function ForgotPassword() {
     const userExists = users.some((u) => u.email === email) || email === 'admin@fivepigs.com';
 
     if (!userExists) {
-      toast.error('Email không tồn tại trong hệ thống');
+      toast.error('No account found with this email address');
       return;
     }
 
-    toast.success('Email hợp lệ! Vui lòng nhập mật khẩu mới');
+    toast.success('Email verified! Please enter your new password.');
     setStep(2);
   };
 
@@ -37,24 +37,24 @@ export function ForgotPassword() {
     e.preventDefault();
 
     if (newPassword.length < 6) {
-      toast.error('Mật khẩu phải có ít nhất 6 ký tự');
+      toast.error('Password must contain at least 6 characters');
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      toast.error('Mật khẩu xác nhận không khớp');
+      toast.error('Password confirmation does not match');
       return;
     }
 
     const success = resetPassword(email, newPassword);
 
     if (success) {
-      toast.success('Đặt lại mật khẩu thành công!');
+      toast.success('Password changed successfully!');
       setTimeout(() => {
         navigate('/login');
       }, 1500);
     } else {
-      toast.error('Có lỗi xảy ra, vui lòng thử lại');
+      toast.error('Something went wrong, please try again');
     }
   };
 
@@ -64,11 +64,11 @@ export function ForgotPassword() {
         {/* Logo */}
         <div className="text-center mb-8">
           <img src={LogoImg} alt="FivePigs Store" className="h-16 w-16 mx-auto mb-4" />
-          <h2 className="text-3xl font-bold text-gray-900">Quên mật khẩu</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Forgot your password?</h2>
           <p className="text-gray-600 mt-2">
             {step === 1
-              ? 'Nhập email để đặt lại mật khẩu'
-              : 'Nhập mật khẩu mới của bạn'
+              ? 'Enter email to reset password'
+              : 'Please enter your new password'
             }
           </p>
         </div>
@@ -96,7 +96,7 @@ export function ForgotPassword() {
               type="submit"
               className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
             >
-              Tiếp tục
+              Next
             </button>
           </form>
         ) : (
@@ -105,14 +105,14 @@ export function ForgotPassword() {
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-600" />
                 <p className="text-sm text-green-800">
-                  Email xác nhận: <strong>{email}</strong>
+                  Verification email: <strong>{email}</strong>
                 </p>
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Mật khẩu mới
+                Enter new password
               </label>
               <input
                 type="password"
@@ -123,12 +123,12 @@ export function ForgotPassword() {
                 placeholder="••••••••"
                 minLength={6}
               />
-              <p className="text-xs text-gray-500 mt-1">Tối thiểu 6 ký tự</p>
+              <p className="text-xs text-gray-500 mt-1">At least 6 characters</p>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Xác nhận mật khẩu
+                Confirm your password
               </label>
               <input
                 type="password"
@@ -144,7 +144,7 @@ export function ForgotPassword() {
               type="submit"
               className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
             >
-              Đặt lại mật khẩu
+              Reset your password
             </button>
 
             <button
@@ -152,7 +152,7 @@ export function ForgotPassword() {
               onClick={() => setStep(1)}
               className="w-full bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition"
             >
-              Quay lại
+              Back
             </button>
           </form>
         )}
@@ -161,7 +161,7 @@ export function ForgotPassword() {
         <div className="mt-6 text-center space-y-2">
           <Link to="/login" className="text-sm text-blue-600 hover:underline flex items-center justify-center gap-1">
             <ArrowLeft className="w-4 h-4" />
-            Quay lại đăng nhập
+            Return to login
           </Link>
         </div>
       </div>

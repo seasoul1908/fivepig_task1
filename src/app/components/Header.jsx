@@ -4,9 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
 import { useState } from "react";
 
-// Nếu bạn có logo local, import ở đây:
-// import logoImage from "../assets/logo.png";
-const logoImage = ""; // để trống vẫn chạy
+const logoImage = "";
 
 export function Header() {
   const { user, logout, isAdmin } = useAuth();
@@ -51,7 +49,7 @@ export function Header() {
             <input
               className="search__input"
               type="text"
-              placeholder="Tìm kiếm sản phẩm..."
+              placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -65,7 +63,7 @@ export function Header() {
               <span
                 style={{ fontSize: 13, color: "var(--muted)", fontWeight: 600 }}
               >
-                Xin chào, {user.name}
+                Hello, {user.name}
               </span>
 
               {isAdmin ? (
@@ -78,7 +76,7 @@ export function Header() {
                   {/* PROFILE */}
                   <button className="btn" onClick={() => navigate("/profile")}>
                     <User size={18} style={{ marginRight: 8 }} />
-                    Hồ sơ
+                    Profile
                   </button>
 
                   <button
@@ -87,7 +85,7 @@ export function Header() {
                     style={{ position: "relative" }}
                   >
                     <ShoppingCart size={18} style={{ marginRight: 8 }} />
-                    Giỏ hàng
+                    Cart
                     {totalItems > 0 && (
                       <span className="cartBadge">{totalItems}</span>
                     )}
@@ -95,14 +93,14 @@ export function Header() {
 
                   <button className="btn" onClick={() => navigate("/orders")}>
                     <NotebookPen size={18} style={{ marginRight: 8 }} />
-                    Đơn hàng
+                    Orders
                   </button>
                 </>
               )}
 
               <button className="btn" onClick={handleLogout}>
                 <LogOut size={18} style={{ marginRight: 8 }} />
-                Đăng xuất
+                Logout
               </button>
             </>
           ) : (
@@ -111,7 +109,7 @@ export function Header() {
               onClick={() => navigate("/login")}
             >
               <User size={18} style={{ marginRight: 8 }} />
-              Đăng nhập
+              Login
             </button>
           )}
         </nav>

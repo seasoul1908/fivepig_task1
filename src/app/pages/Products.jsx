@@ -13,16 +13,12 @@ export function Products() {
   const searchQuery = searchParams.get("search") || "";
   const categoryFilter = searchParams.get("category") || "";
 
-  // 1. STATE CHÍNH: Lưu khoảng giá đang được áp dụng để lọc
   const [priceRange, setPriceRange] = useState([0, 10000000]);
-
-  // 2. STATE TẠM: Lưu giá trị người dùng đang gõ vào ô input
   const [minPriceInput, setMinPriceInput] = useState("");
   const [maxPriceInput, setMaxPriceInput] = useState("");
 
   const [sortBy, setSortBy] = useState("");
 
-  // 3. HÀM ÁP DỤNG GIÁ
   const handleApplyPrice = () => {
     const min = minPriceInput ? Number(minPriceInput) : 0;
     const max = maxPriceInput ? Number(maxPriceInput) : 10000000;
@@ -32,7 +28,6 @@ export function Products() {
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
 
-    // Search
     if (searchQuery) {
       filtered = filtered.filter(
         (p) =>
@@ -41,17 +36,14 @@ export function Products() {
       );
     }
 
-    // Category
     if (categoryFilter) {
       filtered = filtered.filter((p) => p.category === categoryFilter);
     }
 
-    // Price Range
     filtered = filtered.filter(
       (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
     );
 
-    // Sort
     if (sortBy === "price-asc") {
       filtered.sort((a, b) => a.price - b.price);
     } else if (sortBy === "price-desc") {
@@ -76,7 +68,7 @@ export function Products() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <p className="text-xl font-semibold text-gray-500">Đang tải sản phẩm...</p>
+        <p className="text-xl font-semibold text-gray-500">Loading products...</p>
       </div>
     );
   }
@@ -84,16 +76,15 @@ export function Products() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
-
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Sản phẩm</h1>
+            <h1 className="text-3xl font-bold mb-2">Products</h1>
             <p className="text-gray-600">
-              Tìm thấy {filteredProducts.length} sản phẩm
-              {searchQuery && ` cho "${searchQuery}"`}
-              {categoryFilter && ` trong ${categoryFilter}`}
-              {priceRange[0] > 0 && ` (từ ${priceRange[0].toLocaleString()}đ)`}
+              Found {filteredProducts.length} products
+              {searchQuery && ` for "${searchQuery}"`}
+              {categoryFilter && ` in ${categoryFilter}`}
+              {priceRange[0] > 0 && ` (from ${priceRange[0].toLocaleString()}đ)`}
             </p>
           </div>
           <button
@@ -101,18 +92,16 @@ export function Products() {
             className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white border rounded-lg"
           >
             <Filter className="w-5 h-5" />
-            Bộ lọc
+            Filters
           </button>
         </div>
 
         <div className="flex gap-6">
-
           {/* Sidebar */}
           {showFilters && (
             <aside className="w-full lg:w-64 bg-white p-6 rounded-lg shadow-sm h-fit">
-
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-lg">Bộ lọc</h2>
+                <h2 className="font-semibold text-lg">Filters</h2>
                 <button
                   onClick={() => setShowFilters(false)}
                   className="lg:hidden"
@@ -123,7 +112,7 @@ export function Products() {
 
               {/* Category Filter */}
               <div className="mb-6">
-                <h3 className="font-medium mb-3">Danh mục</h3>
+                <h3 className="font-medium mb-3">Categories</h3>
                 <label key="all-category" className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
@@ -131,29 +120,28 @@ export function Products() {
                     checked={!categoryFilter}
                     onChange={() => handleCategoryChange("")}
                   />
-                  <span>Tất cả</span>
+                  <span>All</span>
                 </label>
 
-
-                       {categories.map((cat) => (
-                 <label
-                           key={cat.id}
-                          className="flex items-center gap-2 cursor-pointer mt-2"
-                       >
-                      <input
-                         type="radio"
-                        name="category"
-                       checked={categoryFilter === cat.name}
-                             onChange={() => handleCategoryChange(cat.name)}
-                           />
+                {categories.map((cat) => (
+                  <label
+                    key={cat.id}
+                    className="flex items-center gap-2 cursor-pointer mt-2"
+                  >
+                    <input
+                      type="radio"
+                      name="category"
+                      checked={categoryFilter === cat.name}
+                      onChange={() => handleCategoryChange(cat.name)}
+                    />
                     <span>{cat.name}</span>
-                            </label>
-                        ))}
+                  </label>
+                ))}
               </div>
 
               {/* Price Filter*/}
               <div className="mb-6 border-t pt-4">
-                <h3 className="font-medium mb-3">Khoảng giá</h3>
+                <h3 className="font-medium mb-3">Price Range</h3>
                 <div className="flex items-center gap-2">
                   <input
                     type="number"
@@ -175,23 +163,23 @@ export function Products() {
                   onClick={handleApplyPrice}
                   className="w-full mt-3 bg-black text-white py-2 text-sm rounded hover:bg-gray-800 transition-colors"
                 >
-                  Áp dụng
+                  Apply
                 </button>
               </div>
 
               {/* Sort */}
               <div className="border-t pt-4">
-                <h3 className="font-medium mb-3">Sắp xếp</h3>
+                <h3 className="font-medium mb-3">Sort by</h3>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-black"
                 >
-                  <option value="">Mặc định</option>
-                  <option value="name">Tên A-Z</option>
-                  <option value="price-asc">Giá tăng dần</option>
-                  <option value="price-desc">Giá giảm dần</option>
-                  <option value="rating">Đánh giá cao nhất</option>
+                  <option value="">Default</option>
+                  <option value="name">Name A-Z</option>
+                  <option value="price-asc">Price Low to High</option>
+                  <option value="price-desc">Price High to Low</option>
+                  <option value="rating">Top Rated</option>
                 </select>
               </div>
             </aside>
@@ -202,16 +190,13 @@ export function Products() {
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}   // ✅ FIX KEY CHUẨN 100%
-                    product={product}
-                  />
+                  <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             ) : (
               <div className="text-center py-16">
                 <p className="text-gray-500 text-lg">
-                  Không tìm thấy sản phẩm nào phù hợp với mức giá này.
+                  No products found matching this price range.
                 </p>
                 <button
                   onClick={() => {
@@ -221,12 +206,11 @@ export function Products() {
                   }}
                   className="mt-4 text-blue-500 underline"
                 >
-                  Xóa bộ lọc giá
+                  Clear price filter
                 </button>
               </div>
             )}
           </div>
-
         </div>
       </div>
     </div>
