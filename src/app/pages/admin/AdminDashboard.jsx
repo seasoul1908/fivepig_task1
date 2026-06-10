@@ -46,7 +46,7 @@ export function AdminDashboard() {
     {/* Title */}
     <div>
       <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
-      <p className="text-gray-500 mt-1">Tổng quan hoạt động hệ thống</p>
+      <p className="text-gray-500 mt-1">System Overview</p>
     </div>
 
     {/* Stats Cards */}
@@ -61,7 +61,7 @@ export function AdminDashboard() {
           </div>
           <TrendingUp className="w-5 h-5 text-green-500" />
         </div>
-        <p className="text-sm text-gray-500">Tổng doanh thu</p>
+        <p className="text-sm text-gray-500">Total Revenue</p>
         <h2 className="text-2xl font-bold text-gray-800 mt-1">
           {formatPrice(totalRevenue)}
         </h2>
@@ -72,12 +72,12 @@ export function AdminDashboard() {
         <div className="p-3 bg-green-100 rounded-xl mb-4 w-fit">
           <ShoppingBag className="w-6 h-6 text-green-600" />
         </div>
-        <p className="text-sm text-gray-500">Tổng đơn hàng</p>
+        <p className="text-sm text-gray-500">Total Orders</p>
         <h2 className="text-2xl font-bold text-gray-800">
           {totalOrders}
         </h2>
         <p className="text-sm text-yellow-500 mt-1">
-          {pendingOrders} đang chờ xử lý
+          {pendingOrders} pending
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export function AdminDashboard() {
         <div className="p-3 bg-purple-100 rounded-xl mb-4 w-fit">
           <Package className="w-6 h-6 text-purple-600" />
         </div>
-        <p className="text-sm text-gray-500">Sản phẩm</p>
+        <p className="text-sm text-gray-500">Products</p>
         <h2 className="text-2xl font-bold text-gray-800">
           {totalProducts}
         </h2>
@@ -97,7 +97,7 @@ export function AdminDashboard() {
         <div className="p-3 bg-yellow-100 rounded-xl mb-4 w-fit">
           <Users className="w-6 h-6 text-yellow-600" />
         </div>
-        <p className="text-sm text-gray-500">Tồn kho</p>
+        <p className="text-sm text-gray-500">Stock</p>
         <h2 className="text-2xl font-bold text-gray-800">
           {products.reduce((sum, p) => sum + p.stock, 0)}
         </h2>
@@ -109,7 +109,7 @@ export function AdminDashboard() {
     <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
       <div className="px-6 py-4 border-b bg-gray-50">
         <h2 className="text-lg font-semibold text-gray-700">
-          Đơn hàng gần đây
+          Recent Orders
         </h2>
       </div>
 
@@ -117,11 +117,11 @@ export function AdminDashboard() {
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
             <tr>
-              <th className="px-6 py-3 text-left">Mã đơn</th>
-              <th className="px-6 py-3 text-left">Khách hàng</th>
-              <th className="px-6 py-3 text-left">Tổng tiền</th>
-              <th className="px-6 py-3 text-left">Trạng thái</th>
-              <th className="px-6 py-3 text-left">Ngày đặt</th>
+              <th className="px-6 py-3 text-left">Order ID</th>
+              <th className="px-6 py-3 text-left">Customer</th>
+              <th className="px-6 py-3 text-left">Total Amount</th>
+              <th className="px-6 py-3 text-left">Status</th>
+              <th className="px-6 py-3 text-left">Order Date</th>
             </tr>
           </thead>
 
