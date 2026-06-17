@@ -618,7 +618,7 @@
         }
       ],
       "totalPrice": 180000,
-      "status": "Delivered",
+      "status": "Shipped",
       "shippingInfo": {
         "name": "Hiep",
         "phone": "12313123123",
