@@ -136,7 +136,8 @@ export function AdminProducts() {
 
       toast.success("Product removed successfully!");
     } catch (error) {
-      toast.error("Failed to delete product!");
+      // Display specific error message from Context
+      toast.error(error.message || "Failed to delete product!");
     }
   };
 
@@ -260,7 +261,7 @@ export function AdminProducts() {
               {/* IMAGE UPLOAD SECTION */}
               <div className="border border-gray-200 p-4 rounded-lg bg-gray-50">
                 <label className="block text-sm font-medium mb-2">Product Image</label>
-                
+
                 <div className="flex items-center gap-4 mb-3">
                   <label className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-50 transition">
                     <UploadCloud className="w-5 h-5 text-gray-500" />
@@ -285,9 +286,9 @@ export function AdminProducts() {
                 {/* Image Preview */}
                 {formData.image && (
                   <div className="mt-4 flex justify-center bg-white border rounded-lg p-2">
-                    <img 
-                      src={formData.image} 
-                      alt="Preview" 
+                    <img
+                      src={formData.image}
+                      alt="Preview"
                       className="h-40 object-contain rounded"
                     />
                   </div>
@@ -351,13 +352,12 @@ export function AdminProducts() {
 
                   <td className="py-3 px-4">
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        product.stock > 20
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${product.stock > 20
                           ? "bg-green-100 text-green-800"
                           : product.stock > 0
                             ? "bg-yellow-100 text-yellow-800"
                             : "bg-red-100 text-red-800"
-                      }`}
+                        }`}
                     >
                       {product.stock}
                     </span>
@@ -415,11 +415,10 @@ export function AdminProducts() {
               <button
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`px-3 py-2 rounded-lg border text-sm font-medium transition ${
-                  currentPage === 1
+                className={`px-3 py-2 rounded-lg border text-sm font-medium transition ${currentPage === 1
                     ? "bg-gray-50 text-gray-400 cursor-not-allowed"
                     : "bg-white hover:bg-gray-50 text-gray-700"
-                }`}
+                  }`}
               >
                 Previous
               </button>
@@ -428,11 +427,10 @@ export function AdminProducts() {
                 <button
                   key={page}
                   onClick={() => goToPage(page)}
-                  className={`w-10 h-10 rounded-lg text-sm font-medium border transition ${
-                    currentPage === page
+                  className={`w-10 h-10 rounded-lg text-sm font-medium border transition ${currentPage === page
                       ? "bg-blue-600 text-white border-blue-600"
                       : "bg-white text-gray-700 hover:bg-gray-50"
-                  }`}
+                    }`}
                 >
                   {page}
                 </button>
@@ -441,11 +439,10 @@ export function AdminProducts() {
               <button
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages || totalPages === 0}
-                className={`px-3 py-2 rounded-lg border text-sm font-medium transition ${
-                  currentPage === totalPages || totalPages === 0
+                className={`px-3 py-2 rounded-lg border text-sm font-medium transition ${currentPage === totalPages || totalPages === 0
                     ? "bg-gray-50 text-gray-400 cursor-not-allowed"
                     : "bg-white hover:bg-gray-50 text-gray-700"
-                }`}
+                  }`}
               >
                 Next
               </button>
