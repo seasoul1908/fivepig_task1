@@ -4,9 +4,11 @@ import { User, Mail, Lock, Save, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "../contexts/AuthContext";
 
+// Local json-server users API URL
+const API_URL = "http://localhost:9999/users";
 
 export function Profile() {
-  const { user, updateProfile, logout } = useAuth();
+  const { user, updateProfile, logout, resetPassword } = useAuth();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
@@ -20,13 +22,11 @@ export function Profile() {
     confirmPassword: "",
   });
 
-
   useEffect(() => {
     if (!user) {
       navigate("/login");
       return;
     }
-
 
     setFormData({
       name: user.name || "",
@@ -34,22 +34,20 @@ export function Profile() {
     });
   }, [user, navigate]);
 
-
-  const handleProfileUpdate = (e) => {
+  // Changed to an async function to handle the asynchronous profile update API
+  const handleProfileUpdate = async (e) => {
     e.preventDefault();
-
 
     if (!formData.name.trim()) {
       toast.error("Please enter your full name");
       return;
     }
 
-
-    const success = updateProfile({
+    // Added await here because updateProfile connects to json-server
+    const success = await updateProfile({
       name: formData.name,
       email: formData.email,
     });
-
 
     if (success) {
       toast.success("Account information updated successfully!");
@@ -59,51 +57,56 @@ export function Profile() {
     }
   };
 
-
-  const handlePasswordChange = (e) => {
+  // Changed to an async function to fetch and update password data in database.json
+  const handlePasswordChange = async (e) => {
     e.preventDefault();
 
-
-    // Verify current password
-    const usersData = localStorage.getItem("fivepigs_users");
-    const users = usersData ? JSON.parse(usersData) : [];
-    const currentUser = users.find((u) => u.id === user.id);
-
-
     if (user.role === "admin") {
+      // Validate hardcoded admin password
       if (passwordData.currentPassword !== "admin123") {
         toast.error("Current password is incorrect");
         return;
       }
-    } else if (
-      !currentUser ||
-      currentUser.password !== passwordData.currentPassword
-    ) {
-      toast.error("Current password is incorrect");
-      return;
-    }
+    } else {
+      try {
+        // Fetch the user's latest data from the database using their ID
+        const response = await fetch(`${API_URL}/${user.id}`);
+        if (!response.ok) {
+          toast.error("User account not found in the database");
+          return;
+        }
+        const dbUser = await response.json();
 
+        // Verify the current password (cast to String to prevent type casting issues)
+        if (String(dbUser.password) !== String(passwordData.currentPassword)) {
+          toast.error("Current password is incorrect");
+          return;
+        }
+      } catch (error) {
+        console.error("Error verifying current password:", error);
+        toast.error("Server connection failed. Please try again.");
+        return;
+      }
+    }
 
     if (passwordData.newPassword.length < 6) {
       toast.error("New password must be at least 6 characters");
       return;
     }
 
-
     if (passwordData.newPassword !== passwordData.confirmPassword) {
       toast.error("Password confirmation does not match");
       return;
     }
 
-
-    // Update password in localStorage
+    // Update password in the database for customers using the context function
     if (user.role === "customer") {
-      const updatedUsers = users.map((u) =>
-        u.id === user.id ? { ...u, password: passwordData.newPassword } : u,
-      );
-      localStorage.setItem("fivepigs_users", JSON.stringify(updatedUsers));
+      const success = await resetPassword(user.email, passwordData.newPassword);
+      if (!success) {
+        toast.error("Something went wrong while updating your password");
+        return;
+      }
     }
-
 
     toast.success("Password changed successfully! Please log in again");
     setTimeout(() => {
@@ -112,11 +115,9 @@ export function Profile() {
     }, 1500);
   };
 
-
   if (!user) {
     return null;
   }
-
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -138,7 +139,6 @@ export function Profile() {
           </p>
         </div>
 
-
         <div className="grid gap-6 md:grid-cols-2 items-stretch">
           {/* Profile Information Card */}
           <div className="bg-white rounded-xl shadow-sm p-6 h-full flex flex-col">
@@ -156,7 +156,6 @@ export function Profile() {
               )}
             </div>
 
-
             {!isEditing ? (
               <div className="space-y-4">
                 <div>
@@ -169,7 +168,6 @@ export function Profile() {
                   </div>
                 </div>
 
-
                 <div>
                   <label className="block text-sm font-medium text-gray-500 mb-1">
                     Email
@@ -180,17 +178,15 @@ export function Profile() {
                   </div>
                 </div>
 
-
                 <div>
                   <label className="block text-sm font-medium text-gray-500 mb-1">
                     Role
                   </label>
                   <span
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                      user.role === "admin"
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${user.role === "admin"
                         ? "bg-purple-100 text-purple-800"
                         : "bg-blue-100 text-blue-800"
-                    }`}
+                      }`}
                   >
                     {user.role === "admin" ? "Admin" : "Customer"}
                   </span>
@@ -214,7 +210,6 @@ export function Profile() {
                   />
                 </div>
 
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Email
@@ -236,7 +231,6 @@ export function Profile() {
                     </p>
                   )}
                 </div>
-
 
                 <div className="flex gap-2">
                   <button
@@ -264,7 +258,6 @@ export function Profile() {
             )}
           </div>
 
-
           {/* Change Password Card */}
           <div className="bg-white rounded-xl shadow-sm p-6 h-full flex flex-col">
             <div className="flex items-center justify-between mb-6">
@@ -280,7 +273,6 @@ export function Profile() {
                 </button>
               )}
             </div>
-
 
             {!isChangingPassword ? (
               <div className="flex-1 flex flex-col justify-center items-center text-gray-600">
@@ -310,7 +302,6 @@ export function Profile() {
                   />
                 </div>
 
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     New Password
@@ -334,7 +325,6 @@ export function Profile() {
                   </p>
                 </div>
 
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Confirm New Password
@@ -353,7 +343,6 @@ export function Profile() {
                     placeholder="••••••••"
                   />
                 </div>
-
 
                 <div className="flex gap-2">
                   <button
@@ -382,7 +371,6 @@ export function Profile() {
             )}
           </div>
         </div>
-
 
         {/* Account Stats */}
         <div className="bg-white rounded-lg shadow p-6 mt-6">
@@ -416,5 +404,3 @@ export function Profile() {
     </div>
   );
 }
-
-

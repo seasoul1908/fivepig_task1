@@ -6,6 +6,8 @@ import { toast } from 'sonner';
 import { useAuth } from '../contexts/AuthContext';
 import logoImage from '../../assets/5f9eebaa05a3972bdba63e8eb27e9beea907ac32.png';
 
+// Database API URL
+const API_URL = 'http://localhost:9999/users';
 
 export function ForgotPassword() {
   const [step, setStep] = useState(1); // 1: Enter email, 2: Enter new password
@@ -15,25 +17,38 @@ export function ForgotPassword() {
   const { resetPassword } = useAuth();
   const navigate = useNavigate();
 
-  const handleEmailSubmit = (e) => {
+  // Changed to async function to make API calls
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if email exists in system
-    const usersData = localStorage.getItem('fivepigs_users');
-    const users = usersData ? JSON.parse(usersData) : [];
+    try {
+      // 1. Check if it is the hardcoded Admin account
+      if (email === 'admin@fivepigs.com') {
+        toast.success('Email verified! Please enter your new password.');
+        setStep(2);
+        return;
+      }
 
-    const userExists = users.some((u) => u.email === email) || email === 'admin@fivepigs.com';
+      // 2. Fetch API to search for the user by email in database.json
+      const response = await fetch(`${API_URL}?email=${email}`);
+      const users = await response.json();
 
-    if (!userExists) {
-      toast.error('No account found with this email address');
-      return;
+      // 3. If the returned array is empty -> User does not exist
+      if (users.length === 0) {
+        toast.error('No account found with this email address');
+        return;
+      }
+
+      toast.success('Email verified! Please enter your new password.');
+      setStep(2);
+    } catch (error) {
+      console.error("Error checking email:", error);
+      toast.error('Connection error to the server. Please try again.');
     }
-
-    toast.success('Email verified! Please enter your new password.');
-    setStep(2);
   };
 
-  const handlePasswordReset = (e) => {
+  // Changed to async function to wait for the resetPassword process
+  const handlePasswordReset = async (e) => {
     e.preventDefault();
 
     if (newPassword.length < 6) {
@@ -46,7 +61,8 @@ export function ForgotPassword() {
       return;
     }
 
-    const success = resetPassword(email, newPassword);
+    // Added await here because resetPassword makes an API call to update the database
+    const success = await resetPassword(email, newPassword);
 
     if (success) {
       toast.success('Password changed successfully!');
