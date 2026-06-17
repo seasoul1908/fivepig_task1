@@ -34,7 +34,7 @@
     },
     {
       "id": "1781684722909",
-      "name": "testssss"
+      "name": "testss"
     }
   ],
   "products": [
@@ -686,7 +686,7 @@
     {
       "id": "1781684499279",
       "email": "hiepnd@gmail.com",
-      "password": "123",
+      "password": "hiepnd",
       "name": "Hiep Nguyen",
       "role": "customer"
     }
