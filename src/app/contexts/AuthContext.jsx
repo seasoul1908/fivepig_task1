@@ -31,11 +31,12 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      // Fetch user from json-server database
-      const response = await fetch(`${API_URL}?email=${email}&password=${password}`);
+      // Only fetch user by email to prevent json-server type casting issues
+      const response = await fetch(`${API_URL}?email=${email}`);
       const users = await response.json();
 
-      if (users.length > 0) {
+      // Check if the user exists and compare passwords using JavaScript (casting both to String)
+      if (users.length > 0 && String(users[0].password) === String(password)) {
         const loggedInUser = {
           id: users[0].id,
           email: users[0].email,
