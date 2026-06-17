@@ -11,25 +11,46 @@ export const ORDER_STATUS = {
   CANCELLED: 'Cancelled'
 };
 
+const API_URL = 'http://localhost:9999/orders';
+
 export function OrderProvider({ children }) {
   const [orders, setOrders] = useState([]);
 
-  // Lấy toàn bộ đơn hàng từ localStorage/mockData khi khởi động web
+  // Lấy toàn bộ đơn hàng từ database.json (json-server), hoặc fallback sang localStorage/mockData
   useEffect(() => {
-    const storedOrders = localStorage.getItem('fivepigs_orders');
-    let parsedOrders = initialOrders;
-
-    if (storedOrders) {
+    const fetchOrders = async () => {
       try {
-        parsedOrders = JSON.parse(storedOrders);
-      } catch (e) {
-        console.error("Error parsing stored orders, resetting to initial", e);
+        const res = await fetch(API_URL);
+        if (res.ok) {
+          const data = await res.json();
+          setOrders(data);
+        } else {
+          loadFallbackOrders();
+        }
+      } catch (error) {
+        console.error("Lỗi khi tải đơn hàng từ database.json:", error);
+        loadFallbackOrders();
       }
-    } else {
-      localStorage.setItem('fivepigs_orders', JSON.stringify(initialOrders));
-    }
+    };
 
-    setOrders(parsedOrders);
+    const loadFallbackOrders = () => {
+      const storedOrders = localStorage.getItem('fivepigs_orders');
+      let parsedOrders = initialOrders;
+
+      if (storedOrders) {
+        try {
+          parsedOrders = JSON.parse(storedOrders);
+        } catch (e) {
+          console.error("Error parsing stored orders, resetting to initial", e);
+        }
+      } else {
+        localStorage.setItem('fivepigs_orders', JSON.stringify(initialOrders));
+      }
+
+      setOrders(parsedOrders);
+    };
+
+    fetchOrders();
   }, []);
   
   // Tạo đơn hàng mới
@@ -42,18 +63,49 @@ export function OrderProvider({ children }) {
     };
 
     try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newOrder)
+      });
+      if (res.ok) {
+        const createdOrder = await res.json();
+        setOrders(prev => [...prev, createdOrder]);
+        return createdOrder.id;
+      }
+    } catch (error) {
+      console.error("Lỗi khi gửi đơn hàng lên database.json:", error);
+    }
+
+    // Fallback sang localStorage nếu API lỗi/offline
+    try {
       const updatedOrders = [...orders, newOrder];
       setOrders(updatedOrders);
       localStorage.setItem('fivepigs_orders', JSON.stringify(updatedOrders));
       return newOrder.id;
     } catch (error) {
-      console.error("Lỗi khi lưu đơn hàng:", error);
+      console.error("Lỗi khi lưu đơn hàng vào localStorage:", error);
       return null;
     }
   };
 
   // Cập nhật trạng thái đơn hàng
   const updateOrderStatus = async (orderId, status) => {
+    try {
+      const res = await fetch(`${API_URL}/${orderId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      if (res.ok) {
+        setOrders(prev => prev.map((o) => (o.id === orderId ? { ...o, status } : o)));
+        return;
+      }
+    } catch (error) {
+      console.error("Lỗi khi cập nhật đơn hàng lên database.json:", error);
+    }
+
+    // Fallback sang localStorage nếu API lỗi/offline
     try {
       const updatedOrders = orders.map((o) => (o.id === orderId ? { ...o, status } : o));
       setOrders(updatedOrders);
