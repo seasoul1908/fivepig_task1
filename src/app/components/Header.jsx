@@ -3,8 +3,7 @@ import { ShoppingCart, User, LogOut, LayoutDashboard, NotebookPen } from "lucide
 import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
 import { useState } from "react";
-
-const logoImage = "";
+import logoImage from '../../assets/fivepigslogo.png';
 
 export function Header() {
   const { user, logout, isAdmin } = useAuth();
@@ -27,19 +26,15 @@ export function Header() {
     <header className="header">
       <div className="container header__inner">
         {/* Logo */}
-        <Link to="/" className="brand">
-          <div className="brand__logo">
-            {logoImage ? (
-              <img
-                src={logoImage}
-                alt="FivePigs Store"
-                style={{ width: 28, height: 28 }}
-              />
-            ) : (
-              "🐷"
-            )}
+        <Link to="/" className="brand" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
+          <img
+            src={logoImage}
+            alt="FivePigs Store"
+            style={{ height: 36, width: "auto", objectFit: "contain" }}
+          />
+          <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+            FivePigs Store
           </div>
-          <div>FivePigs Store</div>
         </Link>
 
         {/* Search */}
@@ -67,22 +62,31 @@ export function Header() {
               </span>
 
               {isAdmin ? (
-                <button className="btn" onClick={() => navigate("/admin")}>
+                <button
+                  className="btn"
+                  onClick={() => navigate("/admin")}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
                   <LayoutDashboard size={18} style={{ marginRight: 8 }} />
                   Admin
                 </button>
               ) : (
                 <>
                   {/* PROFILE */}
-                  <button className="btn" onClick={() => navigate("/profile")}>
+                  <button
+                    className="btn"
+                    onClick={() => navigate("/profile")}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
                     <User size={18} style={{ marginRight: 8 }} />
                     Profile
                   </button>
 
+                  {/* CART */}
                   <button
                     className="btn"
                     onClick={() => navigate("/cart")}
-                    style={{ position: "relative" }}
+                    style={{ display: "flex", alignItems: "center", position: "relative" }}
                   >
                     <ShoppingCart size={18} style={{ marginRight: 8 }} />
                     Cart
@@ -91,14 +95,24 @@ export function Header() {
                     )}
                   </button>
 
-                  <button className="btn" onClick={() => navigate("/orders")}>
+                  {/* ORDERS */}
+                  <button
+                    className="btn"
+                    onClick={() => navigate("/orders")}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
                     <NotebookPen size={18} style={{ marginRight: 8 }} />
                     Orders
                   </button>
                 </>
               )}
 
-              <button className="btn" onClick={handleLogout}>
+              {/* LOGOUT */}
+              <button
+                className="btn"
+                onClick={handleLogout}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <LogOut size={18} style={{ marginRight: 8 }} />
                 Logout
               </button>
@@ -107,6 +121,7 @@ export function Header() {
             <button
               className="btn btn--primary"
               onClick={() => navigate("/login")}
+              style={{ display: "flex", alignItems: "center" }}
             >
               <User size={18} style={{ marginRight: 8 }} />
               Login

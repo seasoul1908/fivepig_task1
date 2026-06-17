@@ -60,7 +60,7 @@ export function Login() {
           <img
             src={logoImage}
             alt="FivePigs Store"
-            className="h-16 w-16 mx-auto mb-4"
+            className="h-16 w-auto mx-auto mb-4 object-contain"
           />
           <h2 className="text-3xl font-bold text-gray-900">FivePigs Store</h2>
           <p className="text-gray-600 mt-2">
@@ -68,39 +68,24 @@ export function Login() {
           </p>
         </div>
 
-        {/* Demo Info */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-          <p className="text-sm font-semibold text-blue-800 mb-2">
-            Test account:
-          </p>
-          <p className="text-sm text-blue-700">
-            <strong>Admin:</strong> admin@fivepigs.com / admin123
-          </p>
-          <p className="text-sm text-blue-700 mt-1">
-            <strong>Or</strong> register a new account
-          </p>
-        </div>
-
         {/* Tabs */}
         <div className="flex gap-2 mb-6">
           <button
             onClick={() => setIsLogin(true)}
-            className={`flex-1 py-2 px-4 rounded-lg font-medium transition ${
-              isLogin
+            className={`flex-1 py-2 px-4 rounded-lg font-medium transition ${isLogin
                 ? "bg-blue-600 text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
+              }`}
           >
             <LogIn className="w-4 h-4 inline mr-2" />
             Login
           </button>
           <button
             onClick={() => setIsLogin(false)}
-            className={`flex-1 py-2 px-4 rounded-lg font-medium transition ${
-              !isLogin
+            className={`flex-1 py-2 px-4 rounded-lg font-medium transition ${!isLogin
                 ? "bg-blue-600 text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
+              }`}
           >
             <UserPlus className="w-4 h-4 inline mr-2" />
             Sign up
