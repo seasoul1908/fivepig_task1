@@ -55,8 +55,8 @@ export function Checkout() {
     setIsProcessing(true);
 
     // Simulate payment processing
-    setTimeout(() => {
-      const orderId = createOrder({
+    setTimeout(async () => {
+      const orderId = await createOrder({
         userId: user.id,
         items,
         totalPrice: finalTotal,
