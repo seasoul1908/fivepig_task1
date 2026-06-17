@@ -2,79 +2,133 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 const ProductContext = createContext();
 
+// Khai báo chung cổng 9999 cho gọn
+const API_URL = 'http://localhost:9999';
+
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  // Thêm state loading để lúc dữ liệu đang tải, web không bị giật hoặc lỗi
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Hàm gọi API từ json-server
-    const fetchFivePigsData = async () => {
-      try {
-        setLoading(true);
-        // Gọi dữ liệu sản phẩm
-        const resProducts = await fetch('http://localhost:9999/products');
-        const dataProducts = await resProducts.json();
-        
-        // Gọi dữ liệu danh mục
-        const resCategories = await fetch('http://localhost:9999/categories');
-        const dataCategories = await resCategories.json();
-
-        // Cập nhật vào kho chứa chung
-        setProducts(dataProducts);
-        setCategories(dataCategories);
-      } catch (error) {
-        console.error("Lỗi khi tải dữ liệu từ database.json:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFivePigsData();
-  }, []);
-
-  // Giữ nguyên hàm này để trang ProductDetail vẫn tìm được sản phẩm
-  const getProduct = (id) => products.find((p) => String(p.id) === String(id));
-
-  // 1. Hàm lấy danh sách đánh giá theo ID sản phẩm
-  const getReviewsByProductId = async (productId) => {
+  // 1. Tải dữ liệu ban đầu
+  const fetchFivePigsData = async () => {
     try {
-      // Ép kiểu productId sang String để khớp với database của bạn
-      const res = await fetch(`http://localhost:9999/reviews?productId=${String(productId)}`);
-      return await res.json();
+      setLoading(true);
+      const resProducts = await fetch(`${API_URL}/products`);
+      const dataProducts = await resProducts.json();
+      
+      const resCategories = await fetch(`${API_URL}/categories`);
+      const dataCategories = await resCategories.json();
+
+      setProducts(dataProducts);
+      setCategories(dataCategories);
     } catch (error) {
-      console.error("Lỗi khi lấy đánh giá:", error);
-      return []; // Nếu lỗi, trả về mảng rỗng để web không bị crash
+      console.error("Lỗi khi tải dữ liệu từ database.json:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // 2. Hàm thêm một đánh giá mới vào database
+  useEffect(() => {
+    fetchFivePigsData();
+  }, []);
+
+  const getProduct = (id) => products.find((p) => String(p.id) === String(id));
+
+  // 2. Các hàm lấy và gửi đánh giá (Reviews)
+  const getReviewsByProductId = async (productId) => {
+    try {
+      const res = await fetch(`${API_URL}/reviews?productId=${String(productId)}`);
+      return await res.json();
+    } catch (error) {
+      console.error("Lỗi khi lấy đánh giá:", error);
+      return [];
+    }
+  };
+
   const addReview = async (newReview) => {
     try {
-      const res = await fetch(`http://localhost:9999/reviews`, {
+      const res = await fetch(`${API_URL}/reviews`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReview)
       });
-      return await res.json(); // json-server sẽ tự động thêm 'id' và trả về object vừa tạo
+      return await res.json();
     } catch (error) {
       console.error("Lỗi khi gửi đánh giá:", error);
       return null;
     }
   };
 
-  // Truyền thêm 2 hàm mới vào value
+  // ========================================================
+  // 3. CÁC HÀM CRUD DÀNH CHO ADMIN (Thêm, Sửa, Xóa Sản Phẩm)
+  // ========================================================
+
+  const addProduct = async (productData) => {
+    try {
+      const res = await fetch(`${API_URL}/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productData)
+      });
+      const newProduct = await res.json();
+      
+      // Cập nhật lại state để giao diện tự refresh
+      setProducts(prev => [...prev, newProduct]);
+      return newProduct;
+    } catch (error) {
+      console.error("Lỗi khi thêm sản phẩm:", error);
+      throw error;
+    }
+  };
+
+  const updateProduct = async (productId, updatedData) => {
+    try {
+      const res = await fetch(`${API_URL}/products/${productId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData)
+      });
+      const data = await res.json();
+      
+      // Cập nhật lại mảng products trên giao diện
+      setProducts(products.map((p) => (String(p.id) === String(productId) ? data : p)));
+      return data;
+    } catch (error) {
+      console.error("Lỗi khi cập nhật sản phẩm:", error);
+      throw error;
+    }
+  };
+
+  const deleteProduct = async (productId) => {
+    try {
+      await fetch(`${API_URL}/products/${productId}`, {
+        method: 'DELETE'
+      });
+      
+      // Cắt bỏ sản phẩm vừa xóa khỏi giao diện
+      setProducts(products.filter((p) => String(p.id) !== String(productId)));
+    } catch (error) {
+      console.error("Lỗi khi xóa sản phẩm:", error);
+      throw error;
+    }
+  };
+
+  // ========================================================
+  // TRUYỀN TOÀN BỘ CÁC HÀM RA NGOÀI QUA VALUE
+  // ========================================================
   const value = {
     products,
     setProducts,
     categories,
-    getProduct,
     loading,
-    getReviewsByProductId, // Khai báo thêm ở đây
-    addReview              // Khai báo thêm ở đây
+    getProduct,
+    getReviewsByProductId,
+    addReview,
+    // Đã thêm 3 hàm quan trọng này cho AdminProducts
+    addProduct,
+    updateProduct,
+    deleteProduct
   };
   
   return (
@@ -84,7 +138,6 @@ export function ProductProvider({ children }) {
   );
 }
 
-// Giữ nguyên custom hook của bạn
 export function useProducts() {
   const ctx = useContext(ProductContext);
   if (!ctx) throw new Error('useProducts must be used within a ProductProvider');
