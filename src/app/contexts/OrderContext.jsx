@@ -11,6 +11,13 @@ export const ORDER_STATUS = {
   CANCELLED: 'Cancelled'
 };
 
+// BỔ SUNG: Hằng số trạng thái thanh toán
+export const PAYMENT_STATUS = {
+  PENDING: 'pending',
+  COMPLETED: 'completed',
+  FAILED: 'failed'
+};
+
 export function OrderProvider({ children }) {
   const [orders, setOrders] = useState([]);
 
@@ -63,6 +70,17 @@ export function OrderProvider({ children }) {
     }
   };
 
+  // BỔ SUNG: Cập nhật trạng thái thanh toán
+  const updatePaymentStatus = async (orderId, paymentStatus) => {
+    try {
+      const updatedOrders = orders.map((o) => (o.id === orderId ? { ...o, paymentStatus } : o));
+      setOrders(updatedOrders);
+      localStorage.setItem('fivepigs_orders', JSON.stringify(updatedOrders));
+    } catch (error) {
+      console.error("Lỗi khi cập nhật trạng thái thanh toán:", error);
+    }
+  };
+
   // Lọc đơn hàng theo ID người dùng
   const getUserOrders = (userId) => {
     return orders
@@ -77,7 +95,15 @@ export function OrderProvider({ children }) {
   const cancelOrder = (orderId) => updateOrderStatus(orderId, ORDER_STATUS.CANCELLED);
 
   return (
-    <OrderContext.Provider value={{ orders, createOrder, updateOrderStatus, getUserOrders, getOrder, cancelOrder }}>
+    <OrderContext.Provider value={{ 
+      orders, 
+      createOrder, 
+      updateOrderStatus, 
+      updatePaymentStatus, // BỔ SUNG: Bắn hàm này ra ngoài để Admin dùng
+      getUserOrders, 
+      getOrder, 
+      cancelOrder 
+    }}>
       {children}
     </OrderContext.Provider>
   );

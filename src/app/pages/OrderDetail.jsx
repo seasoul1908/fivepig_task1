@@ -123,14 +123,25 @@ export function OrderDetail() {
               </div>
             </div>
             
+            {/* ĐÃ CẬP NHẬT: Xử lý hiển thị chuẩn xác cho phương thức và trạng thái thanh toán */}
             <div>
               <h2 className="font-semibold mb-3">Payment Method</h2>
               <div className="bg-gray-50 p-4 rounded-lg text-sm">
-                <p className="text-gray-700">
-                  {order.paymentMethod === 'cod' ? 'Cash on Delivery (COD)' : 'Credit / Debit Card'}
+                <p className="text-gray-800 font-medium">
+                  {order.paymentMethod === 'cod' && 'Cash on Delivery (COD)'}
+                  {order.paymentMethod === 'qr' && 'Bank transfer / Scan QR Code'}
+                  {order.paymentMethod === 'card' && 'Credit / Debit Card'}
                 </p>
-                <p className={`font-medium mt-1 ${order.paymentStatus === 'Success' ? 'text-green-600' : 'text-red-600'}`}>
-                  Status: {order.paymentStatus === 'Success' ? 'Paid' : 'Unpaid'}
+                <p className={`font-semibold mt-1 
+                  ${order.paymentStatus === 'completed' ? 'text-green-600' : ''}
+                  ${order.paymentStatus === 'pending' ? 'text-yellow-600' : ''}
+                  ${order.paymentStatus === 'failed' ? 'text-red-600' : ''}
+                `}>
+                  Status: {
+                    order.paymentStatus === 'completed' ? 'Paid (Paid)' : 
+                    order.paymentStatus === 'failed' ? 'Failed (Failed)' : 
+                    'Unpaid (Pending payment)'
+                  }
                 </p>
               </div>
             </div>
