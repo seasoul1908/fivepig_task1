@@ -115,6 +115,62 @@ export function ProductProvider({ children }) {
   };
 
   // ========================================================
+  // CRUD CHO CATEGORIES (Thêm, Sửa, Xóa Danh Mục)
+  // ========================================================
+
+  const addCategory = async (categoryName) => {
+    try {
+      const newCategory = {
+        id: Date.now(), // Tạo ID tạm bằng timestamp
+        name: categoryName
+      };
+      
+      const res = await fetch(`${API_URL}/categories`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newCategory)
+      });
+      const data = await res.json();
+      
+      setCategories(prev => [...prev, data]);
+      return data;
+    } catch (error) {
+      console.error("Lỗi khi thêm danh mục:", error);
+      throw error;
+    }
+  };
+
+  const updateCategory = async (categoryId, updatedName) => {
+    try {
+      const res = await fetch(`${API_URL}/categories/${categoryId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: updatedName })
+      });
+      const data = await res.json();
+      
+      setCategories(categories.map((c) => (c.id === categoryId ? data : c)));
+      return data;
+    } catch (error) {
+      console.error("Lỗi khi cập nhật danh mục:", error);
+      throw error;
+    }
+  };
+
+  const deleteCategory = async (categoryId) => {
+    try {
+      await fetch(`${API_URL}/categories/${categoryId}`, {
+        method: 'DELETE'
+      });
+      
+      setCategories(categories.filter((c) => c.id !== categoryId));
+    } catch (error) {
+      console.error("Lỗi khi xóa danh mục:", error);
+      throw error;
+    }
+  };
+
+  // ========================================================
   // TRUYỀN TOÀN BỘ CÁC HÀM RA NGOÀI QUA VALUE
   // ========================================================
   const value = {
@@ -128,7 +184,11 @@ export function ProductProvider({ children }) {
     // Đã thêm 3 hàm quan trọng này cho AdminProducts
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    // Thêm 3 hàm CRUD cho Categories
+    addCategory,
+    updateCategory,
+    deleteCategory
   };
   
   return (
