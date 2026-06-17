@@ -16,7 +16,7 @@ export function ProductProvider({ children }) {
       setLoading(true);
       const resProducts = await fetch(`${API_URL}/products`);
       const dataProducts = await resProducts.json();
-      
+
       const resCategories = await fetch(`${API_URL}/categories`);
       const dataCategories = await resCategories.json();
 
@@ -60,10 +60,6 @@ export function ProductProvider({ children }) {
     }
   };
 
-  // ========================================================
-  // 3. CÁC HÀM CRUD DÀNH CHO ADMIN (Thêm, Sửa, Xóa Sản Phẩm)
-  // ========================================================
-
   const addProduct = async (productData) => {
     try {
       const res = await fetch(`${API_URL}/products`, {
@@ -72,7 +68,7 @@ export function ProductProvider({ children }) {
         body: JSON.stringify(productData)
       });
       const newProduct = await res.json();
-      
+
       // Cập nhật lại state để giao diện tự refresh
       setProducts(prev => [...prev, newProduct]);
       return newProduct;
@@ -90,7 +86,7 @@ export function ProductProvider({ children }) {
         body: JSON.stringify(updatedData)
       });
       const data = await res.json();
-      
+
       // Cập nhật lại mảng products trên giao diện
       setProducts(products.map((p) => (String(p.id) === String(productId) ? data : p)));
       return data;
@@ -102,21 +98,29 @@ export function ProductProvider({ children }) {
 
   const deleteProduct = async (productId) => {
     try {
+      //Fetch all orders from database
+      const resOrders = await fetch(`${API_URL}/orders`);
+      const orders = await resOrders.json();
+      //Check if the product exists in any order
+      const isProductInOrder = orders.some(order =>
+        order.items?.some(item => String(item.product.id) === String(productId))
+      );
+      if (isProductInOrder) {
+        // Prevent deletion if the product is linked to an order
+        throw new Error("Cannot delete! This product is currently in an existing order.");
+      }
+      // 3. Delete product if validation passes
       await fetch(`${API_URL}/products/${productId}`, {
         method: 'DELETE'
       });
-      
-      // Cắt bỏ sản phẩm vừa xóa khỏi giao diện
+      // Update UI state
       setProducts(products.filter((p) => String(p.id) !== String(productId)));
     } catch (error) {
-      console.error("Lỗi khi xóa sản phẩm:", error);
-      throw error;
+      console.error("Error deleting product:", error);
+      throw error; // Throw error to be caught by UI
     }
   };
 
-  // ========================================================
-  // TRUYỀN TOÀN BỘ CÁC HÀM RA NGOÀI QUA VALUE
-  // ========================================================
   const value = {
     products,
     setProducts,
@@ -125,12 +129,11 @@ export function ProductProvider({ children }) {
     getProduct,
     getReviewsByProductId,
     addReview,
-    // Đã thêm 3 hàm quan trọng này cho AdminProducts
     addProduct,
     updateProduct,
     deleteProduct
   };
-  
+
   return (
     <ProductContext.Provider value={value}>
       {children}
