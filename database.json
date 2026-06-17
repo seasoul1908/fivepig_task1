@@ -33,8 +33,8 @@
       "name": "Skirts"
     },
     {
-      "id": "1781684722909",
-      "name": "testss"
+      "id": "1781687738788",
+      "name": "s"
     }
   ],
   "products": [
@@ -694,7 +694,7 @@
         }
       ],
       "totalPrice": 180000,
-      "status": "Confirmed",
+      "status": "Delivered",
       "shippingInfo": {
         "name": "trung",
         "phone": "1234567890",
