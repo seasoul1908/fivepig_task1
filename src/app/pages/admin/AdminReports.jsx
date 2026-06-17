@@ -47,14 +47,6 @@ export function AdminReports() {
     count: products.filter((p) => p.category === cat.name).length,
   }));
 
-  // Top selling products (mock)
-  const topProducts = products
-    .map((p) => ({
-      name: p.name,
-      sold: (Number(p.stockSold) || 0) || Math.floor((Number(p.rating) || 3) * 50),
-    }))
-    .sort((a, b) => b.sold - a.sold)
-    .slice(0, 5);
 
   const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
 
@@ -122,21 +114,6 @@ export function AdminReports() {
             </PieChart>
           </ResponsiveContainer>
         </div>
-      </div>
-
-      {/* Top Products */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-bold mb-4">Top Selling Products</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={topProducts} layout="vertical">
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" />
-            <YAxis dataKey="name" type="category" width={150} />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="sold" fill="#10B981" name="Sold" />
-          </BarChart>
-        </ResponsiveContainer>
       </div>
 
       {/* Order Status Breakdown */}
