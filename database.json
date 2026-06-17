@@ -294,7 +294,8 @@
         "M"
       ],
       "stock": 25,
-      "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&auto=format&fit=crop&q=60","rating": 4.5,
+      "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&auto=format&fit=crop&q=60",
+      "rating": 4.5,
       "reviews": 89
     },
     {
@@ -623,6 +624,22 @@
       "paymentMethod": "cod",
       "paymentStatus": "pending",
       "createdAt": "2026-06-10T07:25:28.865Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1781666499721",
+      "email": "hiep@gmail.com",
+      "password": "123",
+      "name": "Hiep Nguyen",
+      "role": "customer"
+    },
+    {
+      "id": "1781666553012",
+      "email": "a@gmail.com",
+      "password": "bbbb",
+      "name": "H",
+      "role": "customer"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

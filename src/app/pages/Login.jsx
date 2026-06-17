@@ -17,11 +17,13 @@ export function Login() {
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // Added async to handle API calls
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isLogin) {
-      const success = login(formData.email, formData.password);
+      // Added await for login
+      const success = await login(formData.email, formData.password);
       if (success) {
         toast.success("Successfully logged in!");
         // Check if admin
@@ -38,7 +40,8 @@ export function Login() {
         toast.error("Please enter your name.");
         return;
       }
-      const success = register(
+      // Added await for register
+      const success = await register(
         formData.email,
         formData.password,
         formData.name,
