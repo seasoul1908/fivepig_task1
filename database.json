@@ -36,8 +36,8 @@
   "products": [
     {
       "id": "1",
-      "name": "Áo Thun Trơn Basic",
-      "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+      "name": "Basic Plain T-Shirt",
+      "description": "100% cotton t-shirt, breathable, good sweat absorption, suitable for daily wear.",
       "price": 150000,
       "category": "T-Shirts",
       "sizes": [
@@ -47,14 +47,14 @@
         "XL"
       ],
       "stock": 100,
-      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=60",
       "rating": 4.8,
       "reviews": 320
     },
     {
       "id": "2",
-      "name": "Áo Thun Form Rộng Oversize",
-      "description": "Áo thun nam nữ form rộng, phong cách đường phố (streetwear) năng động.",
+      "name": "Oversize T-Shirt",
+      "description": "Unisex oversized t-shirt, dynamic streetwear style.",
       "price": 180000,
       "category": "T-Shirts",
       "sizes": [
@@ -63,14 +63,14 @@
         "XL"
       ],
       "stock": 80,
-      "image": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&q=60",
       "rating": 4.5,
       "reviews": 150
     },
     {
       "id": "3",
-      "name": "Áo Sơ Mi Oxford Dài Tay",
-      "description": "Sơ mi Oxford thanh lịch, đứng form, dễ dàng kết hợp đi làm hoặc đi chơi.",
+      "name": "Long Sleeve Oxford Shirt",
+      "description": "Elegant Oxford shirt, standard form, easy to mix for work or casual outings.",
       "price": 320000,
       "category": "Shirts",
       "sizes": [
@@ -80,14 +80,14 @@
         "XL"
       ],
       "stock": 50,
-      "image": "https://images.unsplash.com/photo-1596755094514-f87e32f85e2c?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=60",
       "rating": 4.7,
       "reviews": 89
     },
     {
       "id": "4",
-      "name": "Áo Sơ Mi Flannel Kẻ Caro",
-      "description": "Sơ mi caro chất liệu vải nỉ mềm mại, mang đậm chất cổ điển và cá tính.",
+      "name": "Plaid Flannel Shirt",
+      "description": "Plaid shirt made of soft flannel, vintage and edgy.",
       "price": 280000,
       "category": "Shirts",
       "sizes": [
@@ -96,14 +96,14 @@
         "XL"
       ],
       "stock": 40,
-      "image": "https://images.unsplash.com/photo-1604644401890-0bd678c83788?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=500&q=60",
       "rating": 4.4,
       "reviews": 112
     },
     {
       "id": "5",
-      "name": "Áo Polo Nam Cổ Trụ",
-      "description": "Áo thun có cổ chất vải cá sấu cao cấp, không nhăn, không xù lông.",
+      "name": "Men's Polo Shirt",
+      "description": "Collared t-shirt with premium pique fabric, anti-wrinkle, anti-pilling.",
       "price": 250000,
       "category": "Shirts",
       "sizes": [
@@ -113,14 +113,14 @@
         "XXL"
       ],
       "stock": 120,
-      "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=500&q=60",
       "rating": 4.9,
       "reviews": 430
     },
     {
       "id": "6",
-      "name": "Quần Jeans Nam Ống Đứng",
-      "description": "Quần jeans form straight cơ bản, chất denim dày dặn, bền màu.",
+      "name": "Men's Straight Leg Jeans",
+      "description": "Basic straight-form jeans, thick and durable denim.",
       "price": 450000,
       "category": "Jeans",
       "sizes": [
@@ -131,14 +131,14 @@
         "34"
       ],
       "stock": 65,
-      "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1604176354204-9268737828e4?w=500&q=60",
       "rating": 4.6,
       "reviews": 75
     },
     {
       "id": "7",
-      "name": "Quần Jeans Nữ Lưng Cao",
-      "description": "Jeans cạp cao tôn dáng, giúp kéo dài chân, chất liệu co giãn nhẹ.",
+      "name": "Women's High-Waisted Jeans",
+      "description": "Figure-flattering high-waisted jeans, elongates the legs, slightly stretchy material.",
       "price": 380000,
       "category": "Jeans",
       "sizes": [
@@ -147,14 +147,14 @@
         "L"
       ],
       "stock": 45,
-      "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?w=500&q=60",
       "rating": 4.8,
       "reviews": 210
     },
     {
       "id": "8",
-      "name": "Quần Tây Chino Nam",
-      "description": "Quần Chino vải kaki co giãn, thiết kế tinh tế, phù hợp môi trường công sở.",
+      "name": "Men's Chino Pants",
+      "description": "Stretchy khaki Chino pants, elegant design, suitable for the office.",
       "price": 350000,
       "category": "Pants",
       "sizes": [
@@ -170,8 +170,8 @@
     },
     {
       "id": "9",
-      "name": "Quần Nỉ Jogger Thể Thao",
-      "description": "Quần jogger bo gấu thoải mái, chuyên dụng cho tập gym hoặc dạo phố.",
+      "name": "Sporty Fleece Jogger Pants",
+      "description": "Comfortable cuffed jogger pants, specialized for gym or casual walks.",
       "price": 220000,
       "category": "Pants",
       "sizes": [
@@ -180,14 +180,14 @@
         "XL"
       ],
       "stock": 80,
-      "image": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1580906853203-f493cea9ff28?w=500&q=60",
       "rating": 4.3,
       "reviews": 45
     },
     {
       "id": "10",
-      "name": "Áo Hoodie Trơn Có Mũ",
-      "description": "Hoodie nỉ bông dày dặn, giữ ấm cực tốt cho mùa đông.",
+      "name": "Plain Pullover Hoodie",
+      "description": "Thick fleece hoodie, keeps warm extremely well for winter.",
       "price": 290000,
       "category": "Hoodies",
       "sizes": [
@@ -197,14 +197,14 @@
         "XXL"
       ],
       "stock": 150,
-      "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=500&q=60",
       "rating": 4.7,
       "reviews": 340
     },
     {
       "id": "11",
-      "name": "Áo Hoodie Zip Thể Thao",
-      "description": "Áo khoác nỉ có khóa kéo, thiết kế mũ trùm tiện lợi, năng động.",
+      "name": "Sporty Zip-Up Hoodie",
+      "description": "Fleece jacket with zipper, convenient hood design, dynamic.",
       "price": 310000,
       "category": "Hoodies",
       "sizes": [
@@ -213,14 +213,14 @@
         "XL"
       ],
       "stock": 70,
-      "image": "https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=500&q=60",
       "rating": 4.6,
       "reviews": 125
     },
     {
       "id": "12",
-      "name": "Áo Khoác Denim Bụi Bặm",
-      "description": "Jacket bò form cứng cáp, phong cách vintage dễ phối với áo thun.",
+      "name": "Edgy Denim Jacket",
+      "description": "Sturdy denim jacket, vintage style, easy to mix with t-shirts.",
       "price": 450000,
       "category": "Jackets",
       "sizes": [
@@ -229,14 +229,14 @@
         "XL"
       ],
       "stock": 35,
-      "image": "https://images.unsplash.com/photo-1495105718506-659a617631da?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1516257984-b1b4d707412e?w=500&q=60",
       "rating": 4.8,
       "reviews": 270
     },
     {
       "id": "13",
-      "name": "Áo Khoác Bomber Gió",
-      "description": "Áo khoác dù bomber 2 lớp, chống nước nhẹ, cản gió tốt.",
+      "name": "Windbreaker Bomber Jacket",
+      "description": "Double-layered parachute bomber jacket, light water-resistant, good windbreaker.",
       "price": 380000,
       "category": "Jackets",
       "sizes": [
@@ -246,14 +246,14 @@
         "XL"
       ],
       "stock": 90,
-      "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=500&q=60",
       "rating": 4.4,
       "reviews": 88
     },
     {
       "id": "14",
-      "name": "Áo Khoác Da Biker",
-      "description": "Jacket da lót nỉ sành điệu, đường may tỉ mỉ, khóa kéo cao cấp.",
+      "name": "Biker Leather Jacket",
+      "description": "Stylish fleece-lined leather jacket, meticulous stitching, premium zipper.",
       "price": 850000,
       "category": "Jackets",
       "sizes": [
@@ -262,14 +262,14 @@
         "XL"
       ],
       "stock": 20,
-      "image": "https://images.unsplash.com/photo-1520975954732-57dd22299614?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=60",
       "rating": 4.9,
       "reviews": 65
     },
     {
       "id": "15",
-      "name": "Váy Liền Mùa Hè Họa Tiết Hoa",
-      "description": "Đầm hoa nhí vintage, chất đũi lụa mềm mại, bay bổng cho ngày nắng.",
+      "name": "Summer Floral Dress",
+      "description": "Vintage small floral dress, soft linen material, flowy for sunny days.",
       "price": 420000,
       "category": "Dresses",
       "sizes": [
@@ -278,14 +278,14 @@
         "L"
       ],
       "stock": 60,
-      "image": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1612336307429-8a898d10e223?w=500&q=60",
       "rating": 4.7,
       "reviews": 142
     },
     {
       "id": "16",
-      "name": "Đầm Dự Tiệc Dáng Ôm",
-      "description": "Đầm bodycon ôm sát quyến rũ, chất thun gân co giãn 4 chiều.",
+      "name": "Bodycon Party Dress",
+      "description": "Seductive form-fitting bodycon dress, 4-way stretch ribbed fabric.",
       "price": 550000,
       "category": "Dresses",
       "sizes": [
@@ -294,14 +294,13 @@
         "M"
       ],
       "stock": 25,
-      "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&auto=format&fit=crop&q=60",
-      "rating": 4.5,
+      "image": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&auto=format&fit=crop&q=60","rating": 4.5,
       "reviews": 89
     },
     {
       "id": "17",
-      "name": "Chân Váy Chữ A Công Sở",
-      "description": "Chân váy chữ A tôn dáng, dễ dàng mix match cùng áo sơ mi.",
+      "name": "A-Line Office Skirt",
+      "description": "Figure-flattering A-line skirt, easily mix and match with shirts.",
       "price": 260000,
       "category": "Skirts",
       "sizes": [
@@ -316,8 +315,8 @@
     },
     {
       "id": "18",
-      "name": "Chân Váy Xếp Ly Tennis",
-      "description": "Váy ngắn xếp ly xòe trẻ trung, phong cách nữ sinh Hàn Quốc.",
+      "name": "Pleated Tennis Skirt",
+      "description": "Flared short pleated skirt, youthful Korean schoolgirl style.",
       "price": 190000,
       "category": "Skirts",
       "sizes": [
@@ -333,8 +332,8 @@
     },
     {
       "id": "19",
-      "name": "Quần Short Kaki Nam",
-      "description": "Quần ngố kaki thoáng mát, thích hợp mặc dạo phố mùa hè.",
+      "name": "Men's Khaki Shorts",
+      "description": "Breathable khaki shorts, suitable for summer strolling.",
       "price": 190000,
       "category": "Pants",
       "sizes": [
@@ -345,14 +344,14 @@
         "34"
       ],
       "stock": 90,
-      "image": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1552664199-fd31f7431a55?w=500&q=60",
       "rating": 4.5,
       "reviews": 56
     },
     {
       "id": "20",
-      "name": "Áo Sơ Mi Lụa Cổ V Nữ",
-      "description": "Sơ mi chất lụa tơ tằm nhân tạo bóng mượt, rủ tự nhiên, sang trọng.",
+      "name": "Women's V-Neck Silk Shirt",
+      "description": "Shirt made of smooth artificial silk, natural drape, luxurious.",
       "price": 380000,
       "category": "Shirts",
       "sizes": [
@@ -361,7 +360,7 @@
         "L"
       ],
       "stock": 40,
-      "image": "https://images.unsplash.com/photo-1549062572-544a64fb0c56?w=500&auto=format&fit=crop&q=60",
+      "image": "https://images.unsplash.com/photo-1503342394128-c104d54dba01?w=500&q=60",
       "rating": 4.7,
       "reviews": 178
     }
@@ -373,9 +372,9 @@
       "author": "Trần Minh H.",
       "rating": 5,
       "date": "10/03/2026",
-      "content": "Áo mặc rất thích, vải mịn, form đẹp. Sẽ mua thêm màu khác. Giao hàng cũng rất nhanh chóng.",
+      "content": "Love wearing this shirt, smooth fabric, beautiful form. Will buy another color. Delivery was also very fast.",
       "images": [
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&auto=format&fit=crop&q=60"
+        "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=200&q=60"
       ]
     },
     {
@@ -384,7 +383,7 @@
       "author": "Lê Thị P.",
       "rating": 4,
       "date": "08/03/2026",
-      "content": "Áo đẹp nhưng size L hơi rộng một chút so với mình. Chất lượng vải thì ok, không bị xù lông sau khi giặt.",
+      "content": "Beautiful shirt but size L is a bit loose on me. Fabric quality is ok, no pilling after washing.",
       "images": []
     },
     {
@@ -393,7 +392,7 @@
       "author": "Nguyễn Văn T.",
       "rating": 5,
       "date": "09/03/2026",
-      "content": "Form áo chuẩn oversize luôn, mặc bao ngầu. Mình m65 nặng 55kg mặc size M vừa đẹp nha mọi người.",
+      "content": "Standard oversize form, looks very cool. I'm 1m65, 55kg, size M fits perfectly.",
       "images": []
     },
     {
@@ -402,7 +401,7 @@
       "author": "hiep",
       "rating": 5,
       "date": "10/3/2026",
-      "content": "hay",
+      "content": "Good",
       "images": []
     },
     {
@@ -411,7 +410,7 @@
       "author": "hiep",
       "rating": 4,
       "date": "10/3/2026",
-      "content": "sán phẩm tốt",
+      "content": "Good product",
       "images": []
     },
     {
@@ -420,7 +419,7 @@
       "author": "hiep",
       "rating": 3,
       "date": "10/3/2026",
-      "content": "sản phẩm tốt\n",
+      "content": "Good product\n",
       "images": []
     },
     {
@@ -429,7 +428,7 @@
       "author": "hiep",
       "rating": 4,
       "date": "10/3/2026",
-      "content": "hay\n",
+      "content": "Good\n",
       "images": []
     },
     {
@@ -438,7 +437,7 @@
       "author": "Nguyen Duc Hiep",
       "rating": 1,
       "date": "19/3/2026",
-      "content": "Sản phẩm chán",
+      "content": "Bad product",
       "images": []
     },
     {
@@ -447,7 +446,7 @@
       "author": "Mai",
       "rating": 4,
       "date": "24/3/2026",
-      "content": "Áo tốt",
+      "content": "Good shirt",
       "images": []
     }
   ],
@@ -459,8 +458,8 @@
         {
           "product": {
             "id": "1",
-            "name": "Áo Thun Trơn Basic",
-            "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+            "name": "Basic Plain T-Shirt",
+            "description": "100% cotton t-shirt, breathable, good sweat absorption, suitable for daily wear.",
             "price": 150000,
             "category": "T-Shirts",
             "sizes": [
@@ -470,7 +469,7 @@
               "XL"
             ],
             "stock": 100,
-            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+            "image": "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=60",
             "rating": 4.8,
             "reviews": 320
           },
@@ -497,8 +496,8 @@
         {
           "product": {
             "id": "1",
-            "name": "Áo Thun Trơn Basic",
-            "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+            "name": "Basic Plain T-Shirt",
+            "description": "100% cotton t-shirt, breathable, good sweat absorption, suitable for daily wear.",
             "price": 150000,
             "category": "T-Shirts",
             "sizes": [
@@ -508,7 +507,7 @@
               "XL"
             ],
             "stock": 100,
-            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+            "image": "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=60",
             "rating": 4.8,
             "reviews": 320
           },
@@ -518,8 +517,8 @@
         {
           "product": {
             "id": "3",
-            "name": "Áo Sơ Mi Oxford Dài Tay",
-            "description": "Sơ mi Oxford thanh lịch, đứng form, dễ dàng kết hợp đi làm hoặc đi chơi.",
+            "name": "Long Sleeve Oxford Shirt",
+            "description": "Elegant Oxford shirt, standard form, easy to mix for work or casual outings.",
             "price": 320000,
             "category": "Shirts",
             "sizes": [
@@ -529,7 +528,7 @@
               "XL"
             ],
             "stock": 50,
-            "image": "https://images.unsplash.com/photo-1596755094514-f87e32f85e2c?w=500&auto=format&fit=crop&q=60",
+            "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=60",
             "rating": 4.7,
             "reviews": 89
           },
@@ -556,8 +555,8 @@
         {
           "product": {
             "id": "1",
-            "name": "Áo Thun Trơn Basic",
-            "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+            "name": "Basic Plain T-Shirt",
+            "description": "100% cotton t-shirt, breathable, good sweat absorption, suitable for daily wear.",
             "price": 150000,
             "category": "T-Shirts",
             "sizes": [
@@ -567,7 +566,7 @@
               "XL"
             ],
             "stock": 100,
-            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+            "image": "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=60",
             "rating": 4.8,
             "reviews": 320
           },
@@ -594,8 +593,8 @@
         {
           "product": {
             "id": "1",
-            "name": "Áo Thun Trơn Basic",
-            "description": "Áo thun 100% cotton thoáng mát, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
+            "name": "Basic Plain T-Shirt",
+            "description": "100% cotton t-shirt, breathable, good sweat absorption, suitable for daily wear.",
             "price": 150000,
             "category": "T-Shirts",
             "sizes": [
@@ -605,7 +604,7 @@
               "XL"
             ],
             "stock": 100,
-            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+            "image": "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=60",
             "rating": 4.8,
             "reviews": 320
           },

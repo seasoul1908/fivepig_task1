@@ -295,7 +295,7 @@ export function AdminProducts() {
               <tr>
                 <th className="text-left py-3 px-4">Image</th>
                 <th className="text-left py-3 px-4">Product Name</th>
-                <th className="text-left py-3 px-4">Danh mục</th>
+                <th className="text-left py-3 px-4">Categories</th>
                 <th className="text-left py-3 px-4">Price</th>
                 <th className="text-left py-3 px-4">Inventory</th>
                 <th className="text-left py-3 px-4">Action</th>
