@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 import { useProducts } from "../../contexts/ProductContext";
-import { Plus, Edit, Trash2, X } from "lucide-react";
+import { Plus, Edit, Trash2, X, UploadCloud } from "lucide-react";
 import { toast } from "sonner";
 
 export function AdminProducts() {
+  // Extract 'categories' directly from the Context (which fetches from database.json)
   const { products, categories, addProduct, updateProduct, deleteProduct } = useProducts();
 
   const [showForm, setShowForm] = useState(false);
@@ -11,15 +12,6 @@ export function AdminProducts() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const ITEMS_PER_PAGE = 8;
-
-  const categoryList = [
-    { id: 1, name: "T-Shirts" },
-    { id: 2, name: "Jeans" },
-    { id: 3, name: "Jackets" },
-    { id: 4, name: "Dresses" },
-    { id: 5, name: "Hoodies" },
-    { id: 6, name: "Shirts" },
-  ];
 
   const [formData, setFormData] = useState({
     name: "",
@@ -58,6 +50,22 @@ export function AdminProducts() {
     setShowForm(false);
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error("File is too large! Please select an image under 2MB.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -78,7 +86,7 @@ export function AdminProducts() {
     try {
       if (editingProductId) {
         await updateProduct(editingProductId, productData);
-        toast.success("Product update successful!");
+        toast.success("Product updated successfully!");
       } else {
         await addProduct(productData);
         toast.success("Product added successfully!");
@@ -89,7 +97,7 @@ export function AdminProducts() {
 
       resetForm();
     } catch (error) {
-      toast.error(error.message || "Error!");
+      toast.error(error.message || "An error occurred!");
     }
   };
 
@@ -112,7 +120,7 @@ export function AdminProducts() {
   };
 
   const handleDelete = async (productId) => {
-    if (!window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) return;
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
       await deleteProduct(productId);
@@ -128,7 +136,8 @@ export function AdminProducts() {
 
       toast.success("Product removed successfully!");
     } catch (error) {
-      toast.error("Delete the failed product!");
+      // Display specific error message from Context
+      toast.error(error.message || "Failed to delete product!");
     }
   };
 
@@ -142,26 +151,17 @@ export function AdminProducts() {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Product management</h1>
+        <h1 className="text-3xl font-bold">Product Management</h1>
 
         <button
           onClick={() => {
+            resetForm();
             setShowForm(true);
-            setEditingProductId(null);
-            setFormData({
-              name: "",
-              description: "",
-              price: "",
-              category: "",
-              sizes: "",
-              stock: "",
-              image: "",
-            });
           }}
           className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Add Products
+          Add Product
         </button>
       </div>
 
@@ -170,7 +170,7 @@ export function AdminProducts() {
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">
-                {editingProductId ? "Edit product" : "Add new product"}
+                {editingProductId ? "Edit Product" : "Add New Product"}
               </h2>
               <button onClick={resetForm} className="text-gray-500 hover:text-gray-700">
                 <X className="w-6 h-6" />
@@ -221,7 +221,8 @@ export function AdminProducts() {
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Select category</option>
-                    {categoryList.map((cat) => (
+                    {/* Render dynamically from the database categories array */}
+                    {categories.map((cat) => (
                       <option key={cat.id} value={cat.name}>
                         {cat.name}
                       </option>
@@ -233,7 +234,7 @@ export function AdminProducts() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Size (separated by commas)
+                    Sizes (separated by commas)
                   </label>
                   <input
                     type="text"
@@ -246,7 +247,7 @@ export function AdminProducts() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Quantity</label>
+                  <label className="block text-sm font-medium mb-2">Inventory Stock</label>
                   <input
                     type="number"
                     required
@@ -257,28 +258,54 @@ export function AdminProducts() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">Image</label>
-                <input
-                  type="url"
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="https://example.com/image.jpg"
-                />
+              {/* IMAGE UPLOAD SECTION */}
+              <div className="border border-gray-200 p-4 rounded-lg bg-gray-50">
+                <label className="block text-sm font-medium mb-2">Product Image</label>
+
+                <div className="flex items-center gap-4 mb-3">
+                  <label className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                    <UploadCloud className="w-5 h-5 text-gray-500" />
+                    <span className="text-sm font-medium text-gray-700">Upload from PC</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                  <span className="text-sm text-gray-500">OR</span>
+                  <input
+                    type="url"
+                    value={formData.image}
+                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                    className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder="Paste image URL here..."
+                  />
+                </div>
+
+                {/* Image Preview */}
+                {formData.image && (
+                  <div className="mt-4 flex justify-center bg-white border rounded-lg p-2">
+                    <img
+                      src={formData.image}
+                      alt="Preview"
+                      className="h-40 object-contain rounded"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="flex gap-4 pt-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-medium"
                 >
-                  {editingProductId ? "Update" : "Add"}
+                  {editingProductId ? "Update Product" : "Add Product"}
                 </button>
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300"
+                  className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300 font-medium"
                 >
                   Cancel
                 </button>
@@ -295,10 +322,10 @@ export function AdminProducts() {
               <tr>
                 <th className="text-left py-3 px-4">Image</th>
                 <th className="text-left py-3 px-4">Product Name</th>
-                <th className="text-left py-3 px-4">Categories</th>
+                <th className="text-left py-3 px-4">Category</th>
                 <th className="text-left py-3 px-4">Price</th>
                 <th className="text-left py-3 px-4">Inventory</th>
-                <th className="text-left py-3 px-4">Action</th>
+                <th className="text-left py-3 px-4">Actions</th>
               </tr>
             </thead>
 
@@ -309,23 +336,23 @@ export function AdminProducts() {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-12 h-12 object-cover rounded"
+                      className="w-12 h-12 object-cover rounded border"
                     />
                   </td>
 
                   <td className="py-3 px-4">
                     <div>
-                      <p className="font-medium">{product.name}</p>
-                      <p className="text-sm text-gray-600">{product.description}</p>
+                      <p className="font-medium text-gray-900">{product.name}</p>
+                      <p className="text-sm text-gray-500 line-clamp-1">{product.description}</p>
                     </div>
                   </td>
 
-                  <td className="py-3 px-4">{product.category}</td>
-                  <td className="py-3 px-4 font-semibold">{formatPrice(product.price)}</td>
+                  <td className="py-3 px-4 text-gray-700">{product.category}</td>
+                  <td className="py-3 px-4 font-semibold text-gray-900">{formatPrice(product.price)}</td>
 
                   <td className="py-3 px-4">
                     <span
-                      className={`px-2 py-1 rounded-full text-xs ${product.stock > 20
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${product.stock > 20
                           ? "bg-green-100 text-green-800"
                           : product.stock > 0
                             ? "bg-yellow-100 text-yellow-800"
@@ -340,14 +367,16 @@ export function AdminProducts() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleEdit(product.id)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded transition"
+                        title="Edit"
                       >
                         <Edit className="w-4 h-4" />
                       </button>
 
                       <button
                         onClick={() => handleDelete(product.id)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded"
+                        className="p-2 text-red-600 hover:bg-red-50 rounded transition"
+                        title="Delete"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -358,8 +387,8 @@ export function AdminProducts() {
 
               {products.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="py-6 text-center text-gray-500">
-                    No products are available yet.
+                  <td colSpan={6} className="py-8 text-center text-gray-500">
+                    No products available.
                   </td>
                 </tr>
               )}
@@ -370,7 +399,7 @@ export function AdminProducts() {
         {products.length > 0 && (
           <div className="flex items-center justify-between px-4 py-4 border-t bg-white">
             <div className="text-sm text-gray-600">
-              Available{" "}
+              Showing{" "}
               <span className="font-medium">
                 {(currentPage - 1) * ITEMS_PER_PAGE + 1}
               </span>
@@ -378,19 +407,18 @@ export function AdminProducts() {
               <span className="font-medium">
                 {Math.min(currentPage * ITEMS_PER_PAGE, products.length)}
               </span>
-              {" / "}
-              <span className="font-medium">{products.length}</span> Product
+              {" of "}
+              <span className="font-medium">{products.length}</span> products
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`px-3 py-2 rounded-lg border text-sm ${
-                  currentPage === 1
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                className={`px-3 py-2 rounded-lg border text-sm font-medium transition ${currentPage === 1
+                    ? "bg-gray-50 text-gray-400 cursor-not-allowed"
                     : "bg-white hover:bg-gray-50 text-gray-700"
-                }`}
+                  }`}
               >
                 Previous
               </button>
@@ -399,11 +427,10 @@ export function AdminProducts() {
                 <button
                   key={page}
                   onClick={() => goToPage(page)}
-                  className={`w-10 h-10 rounded-lg text-sm border ${
-                    currentPage === page
+                  className={`w-10 h-10 rounded-lg text-sm font-medium border transition ${currentPage === page
                       ? "bg-blue-600 text-white border-blue-600"
                       : "bg-white text-gray-700 hover:bg-gray-50"
-                  }`}
+                    }`}
                 >
                   {page}
                 </button>
@@ -412,13 +439,12 @@ export function AdminProducts() {
               <button
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages || totalPages === 0}
-                className={`px-3 py-2 rounded-lg border text-sm ${
-                  currentPage === totalPages || totalPages === 0
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                className={`px-3 py-2 rounded-lg border text-sm font-medium transition ${currentPage === totalPages || totalPages === 0
+                    ? "bg-gray-50 text-gray-400 cursor-not-allowed"
                     : "bg-white hover:bg-gray-50 text-gray-700"
-                }`}
+                  }`}
               >
-                After
+                Next
               </button>
             </div>
           </div>

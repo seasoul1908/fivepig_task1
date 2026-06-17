@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Mail, ArrowLeft, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '../contexts/AuthContext';
-import LogoImg from '../../assets/5f9eebaa05a3972bdba63e8eb27e9beea907ac32.png';
+import logoImage from '../../assets/5f9eebaa05a3972bdba63e8eb27e9beea907ac32.png';
 
 
 export function ForgotPassword() {
@@ -63,7 +63,11 @@ export function ForgotPassword() {
       <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8">
         {/* Logo */}
         <div className="text-center mb-8">
-          <img src={LogoImg} alt="FivePigs Store" className="h-16 w-16 mx-auto mb-4" />
+          <img
+            src={logoImage}
+            alt="FivePigs Store"
+            className="h-16 w-auto mx-auto mb-4 object-contain"
+          />
           <h2 className="text-3xl font-bold text-gray-900">Forgot your password?</h2>
           <p className="text-gray-600 mt-2">
             {step === 1

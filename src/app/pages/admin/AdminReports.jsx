@@ -18,13 +18,13 @@ export function AdminReports() {
     {
       name: 'Delivered',
       value: orders
-        .filter((o) => o.status === "Shipped")
+        .filter((o) => o.status === "Delivered")
         .reduce((sum, o) => sum + (o.totalPrice || 0), 0),
     },
     {
       name: 'Shipped',
       value: orders
-        .filter((o) => o.status === "Delivery")
+        .filter((o) => o.status === "Shipped")
         .reduce((sum, o) => sum + (o.totalPrice || 0), 0),
     },
     {
