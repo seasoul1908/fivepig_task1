@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useOrders } from '../contexts/OrderContext';
-import { CreditCard, Wallet } from 'lucide-react';
+import { CreditCard, Wallet, QrCode } from 'lucide-react'; // Bổ sung QrCode
 import { toast } from 'sonner';
 
 export function Checkout() {
@@ -20,6 +20,9 @@ export function Checkout() {
   });
   const [paymentMethod, setPaymentMethod] = useState('cod');
   const [isProcessing, setIsProcessing] = useState(false);
+  
+  // BỔ SUNG: State quản lý hiển thị popup QR
+  const [showQRModal, setShowQRModal] = useState(false);
 
   const shippingFee = totalPrice >= 500000 ? 0 : 30000;
   const finalTotal = totalPrice + shippingFee;
@@ -29,6 +32,28 @@ export function Checkout() {
       style: 'currency',
       currency: 'VND'
     }).format(price);
+  };
+
+  // BỔ SUNG: Hàm xử lý riêng khi bấm "Đã chuyển khoản" từ popup QR
+  const processOrderFromQR = () => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      const orderId = createOrder({
+        userId: user.id,
+        items,
+        totalPrice: finalTotal,
+        status: 'pending',
+        shippingInfo: formData,
+        paymentMethod,
+        paymentStatus: paymentMethod === 'cod' ? 'pending' : 'completed'
+      });
+
+      clearCart();
+      setIsProcessing(false);
+      setShowQRModal(false); // Đóng popup
+      toast.success('Order placed successfully!');
+      navigate(`/orders/${orderId}`);
+    }, 2000);
   };
 
   const handleSubmit = async (e) => {
@@ -49,6 +74,12 @@ export function Checkout() {
     const phoneRegex = /^[0-9]{8,12}$/;
     if (!phoneRegex.test(formData.phone)) {
       toast.error('Invalid phone number (must be 8-12 digits)');
+      return;
+    }
+
+    // BỔ SUNG: Chặn luồng submit gốc nếu là QR, hiển thị popup thay thế
+    if (paymentMethod === 'qr') {
+      setShowQRModal(true);
       return;
     }
 
@@ -94,7 +125,7 @@ export function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-8 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold mb-8">Checkout</h1>
 
@@ -167,6 +198,24 @@ export function Checkout() {
                       <p className="text-sm text-gray-600">Pay with cash upon delivery</p>
                     </div>
                   </label>
+
+                  {/* BỔ SUNG: Phương thức QR Code Ngân hàng */}
+                  <label className="flex items-center gap-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="qr"
+                      checked={paymentMethod === 'qr'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="w-4 h-4"
+                    />
+                    <QrCode className="w-6 h-6 text-blue-600" />
+                    <div>
+                      <p className="font-medium">Bank transfer / Scan QR Code</p>
+                      <p className="text-sm text-gray-600">Quick Payment via VietQR (TPBank)</p>
+                    </div>
+                  </label>
+
                   <label className="flex items-center gap-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
                     <input
                       type="radio"
@@ -234,13 +283,54 @@ export function Checkout() {
                   disabled={isProcessing}
                   className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 mt-6 disabled:bg-gray-400"
                 >
-                  {isProcessing ? 'Processing...' : 'Place Order'}
+                  {isProcessing && paymentMethod !== 'qr' ? 'Processing...' : 'Place Order'}
                 </button>
               </div>
             </div>
           </div>
         </form>
       </div>
+
+      {/* BỔ SUNG: Giao diện Modal Popup chứa mã QR */}
+      {showQRModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 text-center">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Order Payment</h3>
+            <p className="text-gray-500 mb-6 text-sm">Open your bank app and scan the QR code to pay.</p>
+            
+            <div className="bg-white p-4 rounded-xl flex justify-center mb-6 border-2 border-dashed border-blue-200">
+              <img 
+                src={`https://img.vietqr.io/image/tpb-07875561811-compact2.png?amount=${finalTotal}&addInfo=Thanh toan don hang&accountName=NGUYEN THE TRUNG`} 
+                alt="Payment QR Code TPBank" 
+                className="w-64 h-64 object-contain"
+              />
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex justify-between items-center px-4 py-3 bg-gray-50 rounded-lg">
+                <span className="text-gray-600 font-medium">Total:</span>
+                <span className="font-bold text-blue-600 text-xl">{formatPrice(finalTotal)}</span>
+              </div>
+
+              <button
+                onClick={processOrderFromQR}
+                disabled={isProcessing}
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 disabled:bg-gray-400"
+              >
+                {isProcessing ? 'Đang xác nhận...' : 'I have successfully transferred the money.'}
+              </button>
+              
+              <button
+                onClick={() => setShowQRModal(false)}
+                disabled={isProcessing}
+                className="w-full text-gray-500 py-2 font-medium hover:text-gray-700"
+              >
+                Cancel and select a different payment method.
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
