@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useOrders } from '../contexts/OrderContext';
-import { Package, Truck, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Package, Truck, CheckCircle, XCircle, Clock, CreditCard, Wallet, QrCode } from 'lucide-react'; // Bổ sung icon thanh toán
 
 export function Orders() {
   const { user } = useAuth();
@@ -44,6 +44,33 @@ export function Orders() {
       case 'Delivered': return 'bg-green-100 text-green-800';
       case 'Cancelled': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getPaymentMethodIcon = (method) => {
+    switch (method) {
+      case 'cod': return <Wallet className="w-4 h-4 text-gray-500" />;
+      case 'qr': return <QrCode className="w-4 h-4 text-gray-500" />;
+      case 'card': return <CreditCard className="w-4 h-4 text-gray-500" />;
+      default: return null;
+    }
+  };
+
+  const getPaymentMethodText = (method) => {
+    switch (method) {
+      case 'cod': return 'Cash on Delivery (COD)';
+      case 'qr': return 'Bank transfer / Scan QR Code';
+      case 'card': return 'Credit / Debit Card';
+      default: return 'N/A';
+    }
+  };
+
+  const getPaymentStatusBadge = (status) => {
+    switch (status) {
+      case 'completed': return <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Paid</span>;
+      case 'pending': return <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">Pending payment</span>;
+      case 'failed': return <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">Failed</span>;
+      default: return <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">Pending</span>;
     }
   };
 
@@ -93,11 +120,26 @@ export function Orders() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 mb-4">
-                    {getStatusIcon(order.status)}
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
-                      {order.status}
-                    </span>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4 bg-gray-50 p-4 rounded-lg">
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-500 font-medium w-24">Delivery:</span>
+                      {getStatusIcon(order.status)}
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
+                        {order.status}
+                      </span>
+                    </div>
+
+                    <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-500 font-medium w-24 sm:w-auto">Payment:</span>
+                      {getPaymentStatusBadge(order.paymentStatus)}
+                      <div className="flex items-center gap-1.5 text-sm text-gray-600 ml-2">
+                        {getPaymentMethodIcon(order.paymentMethod)}
+                        <span>{getPaymentMethodText(order.paymentMethod)}</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="border-t pt-4">
