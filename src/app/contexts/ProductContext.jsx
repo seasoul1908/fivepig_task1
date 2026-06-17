@@ -131,7 +131,11 @@ export function ProductProvider({ children }) {
     addReview,
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    // Thêm 3 hàm CRUD cho Categories
+    addCategory,
+    updateCategory,
+    deleteCategory
   };
 
   return (
